@@ -1,4 +1,5 @@
 <x-layout>
+
     <section class="relative pt-30 px-10">
         <!-- Product Review Page -->
         <div class="product-page grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
@@ -112,18 +113,16 @@
                 </details>
             </div>
         </div>
-
-
     </section>
 
-    
+    <x-modal></x-modal>
+
 
 
     @push('scripts')
-    @vite(['resources/js/productView.js'])
-    @vite(['resources/js/modal.js'])
+        @vite(['resources/js/productView.js'])
+        @vite(['resources/js/modal.js'])
     @endpush
 
-</x-layout>
 
-<x-modal></x-modal>
+</x-layout>

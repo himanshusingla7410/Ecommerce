@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <x-header></x-header>
 
     <div class="bg-white">
@@ -31,7 +30,6 @@
     </div>
 
     <x-footer></x-footer>
-    
     @stack('scripts')
 </body>
 

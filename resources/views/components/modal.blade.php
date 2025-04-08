@@ -12,10 +12,9 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class=" ">
+<body>
 
-    <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden items-center justify-center">
-
+    <div id="modalOverlay" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-40 hidden items-center justify-center mt-8">
         <div id="main" class="container mx-auto max-w-lg bg-white justify-content: text-center shadow-md rounded-md">
             <header>
                 <div class="flex justify-between items-center">

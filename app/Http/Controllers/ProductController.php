@@ -22,7 +22,7 @@ class ProductController extends Controller
 
     public static function checkout() {
 
-        dd('check');
+        
         
     }
 

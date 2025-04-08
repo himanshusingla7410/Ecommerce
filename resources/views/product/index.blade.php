@@ -63,16 +63,16 @@
                     <!-- Add to Cart & Buy Now Buttons -->
                     <div class="flex flex-col gap-2">
                         <button class="w-full bg-white border border-gray-800 text-black py-2 rounded-lg hover:bg-gray-100 transition">Add to cart</button>
-                        <button type="submit" class="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
+                        <button id="buy-btn" type="button" class="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
                             BUY NOW
-                            <img src="gpay-icon.png" alt="Gpay" class="w-5 h-5" />
-                            <img src="paytm-icon.png" alt="Paytm" class="w-5 h-5" />
+                            <!-- <img src="gpay-icon.png" alt="Gpay" class="w-5 h-5" /> -->
+                            <!-- <img src="paytm-icon.png" alt="Paytm" class="w-5 h-5" /> -->
                         </button>
                     </div>
 
                     <!-- Size Chart and Quantity -->
                     <div class="flex items-center justify-between mt-4">
-                        <a href="#" class="text-blue-600 flex items-center gap-1">
+                        <a href="/modal" class="text-blue-600 flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 7a1 1 0 112 0v4a1 1 0 11-2 0V7zm1 8a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
                             </svg>
@@ -116,14 +116,14 @@
 
     </section>
 
-    <script>
-        
-    </script>
-
+    
 
 
     @push('scripts')
     @vite(['resources/js/productView.js'])
+    @vite(['resources/js/modal.js'])
     @endpush
 
 </x-layout>
+
+<x-modal></x-modal>

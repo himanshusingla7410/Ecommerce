@@ -15,7 +15,7 @@
             <h2 class="text-2xl font-bold tracking-tight text-center text-gray-900">New Arrivals</h2>
 
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div class="group relative">
+                <div class="">
                     <img id="first" src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -30,8 +30,8 @@
                         <p class="text-sm font-medium text-gray-900">Rs. 2,350.00</p>
                     </div>
                 </div>
-                <div class="group relative">
-                    <img src="	https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_6.jpg?v=1741779567&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="">
+                    <img  id = "second"src="https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_6.jpg?v=1741779567&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-700">
@@ -45,8 +45,8 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-                <div class="group relative">
-                    <img src="https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_7.jpg?v=1741777951&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="">
+                    <img id="third" src="https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_7.jpg?v=1741777951&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-700">
@@ -60,8 +60,8 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-                <div class="group relative">
-                    <img src="https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_5.jpg?v=1741778399&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="">
+                    <img id="fourth" src="https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_5.jpg?v=1741778399&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-700">
@@ -92,7 +92,7 @@
             <h2 class="text-3xl font-bold tracking-tight text-center text-gray-900">Basics</h2>
 
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div class="group relative">
+                <div class="">
                     <img src="	https://babli.in/cdn/shop/files/IvoryCreamBustierTop_4.jpg?v=1734422635&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -107,7 +107,7 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-                <div class="group relative">
+                <div class="">
                     <img src="	https://babli.in/cdn/shop/files/Snow_White_Bustier_Top_2.jpg?v=1734424289&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -122,7 +122,7 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-                <div class="group relative">
+                <div class="">
                     <img id="firstImg" src="https://babli.in/cdn/shop/files/Jade_Black_Bustier_Top_2.jpg?v=1734422869&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -137,7 +137,7 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-                <div class="group relative">
+                <div class="">
                     <img src="	https://babli.in/cdn/shop/files/CalmBlueShirt.jpg?v=1734421665&width=500" alt="Front of men&#039;s Basic Tee in black." class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>

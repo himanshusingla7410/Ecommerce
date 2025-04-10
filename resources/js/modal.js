@@ -38,11 +38,13 @@ orderSummary.addEventListener('click', (e) => {
 
 // Apply coupon
 applyBtn.addEventListener('click', (e) => {
+
+    
     applyBtn.classList.add('hidden')
     removeCoupon.classList.remove('hidden')
     coupon.textContent = 'XOXO10 applied!'
-    couponAppliedMessage.innerHTML = 'You save<span> Rs 235<span>'
-    orderSummaryPrice.innerHTML = 'Rs 2115'
+    couponAppliedMessage.innerHTML = 'You save'
+    orderSummaryPrice.innerHTML = orderSummaryPrice.dataset.price *0.9
     couponDiscount.classList.add('flex')
     couponDiscount.classList.remove('hidden')
 })
@@ -52,8 +54,8 @@ removeCoupon.addEventListener('click', (e) => {
     removeCoupon.classList.add('hidden')
     applyBtn.classList.remove('hidden')
     coupon.textContent = 'XOXO10'
-    couponAppliedMessage.innerHTML = 'Apply coupon and save<span> Rs 235<span>'
-    orderSummaryPrice.innerHTML = 'Rs 2350'
+    couponAppliedMessage.innerHTML = 'Apply coupon and save'
+    orderSummaryPrice.innerHTML = orderSummaryPrice.dataset.price
     couponDiscount.classList.remove('flex')
     couponDiscount.classList.add('hidden')
 })

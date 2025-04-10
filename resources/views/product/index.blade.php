@@ -6,14 +6,14 @@
             <!-- Left Image Section -->
             <div class="sticky top-20 flex gap-4 h-fit">
                 <div class="flex flex-col gap-2 overflow-y-auto max-h-[600px]">
-                    <img src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=800" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_6.jpg?v=1741865528&width=800" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_7.jpg?v=1741865528&width=800" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_2.jpg?v=1740219822&width=800" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_3.jpg?v=1740219822&width=800" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->images[1]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->images[2]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->images[3]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->images[4]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->images[5]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
                 </div>
                 <div class="flex-1 sticky top-20">
-                    <img id="mainImage" src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=800" alt="product" class="w-full h-auto rounded-xl shadow-lg" />
+                    <img id="mainImage" src="{{$product->images[0]}}" alt="product" class="w-full h-auto rounded-xl shadow-lg"  />
                 </div>
             </div>
 
@@ -23,10 +23,10 @@
                 @csrf
                 <!-- Right Product Detail Section -->
                 <div class="flex flex-col gap-4 sticky top-20">
-                    <input name="product_name" type="hidden" value="Black Weave Dress With Top">
-                    <input name="product_price" type="hidden" value="Rs. 2,350.00">
-                    <h1 class="text-2xl font-semibold">Black Weave Dress With Top</h1>
-                    <P class="text-xl font-medium text-gray-600">Rs. 2,350.00</P>
+                    <input name="product_name" type="hidden" value="{{$product->name}}">
+                    <input name="product_price" type="hidden" value="{{$product->price}}" >
+                    <h1 class="text-2xl font-semibold">{{$product->name}}</h1>
+                    <P class="text-xl font-medium text-gray-600">₹ {{$product->price}}</P>
 
                     <!-- Size Selector -->
                     <div class="flex gap-2">
@@ -115,9 +115,9 @@
         </div>
     </section>
 
-    <x-modal></x-modal>
+    <x-modal :product="$product"></x-modal>
 
-
+    
 
     @push('scripts')
     @vite(['resources/js/productView.js'])

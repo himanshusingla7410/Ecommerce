@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menTab = document.querySelector('#men-tab');
     const womenTab = document.querySelector('#women-tab');
     const womenFlyOutMenu = document.querySelector('#women-flyout-menu');
-    const imgFirst = document.querySelector('#first');
+    const imgFirst = document.querySelectorAll('#landing-page');
     const imgSecond = document.querySelector('#second');
     const imgThird = document.querySelector('#third');
     const imgFourth = document.querySelector('#fourth');
@@ -30,26 +30,44 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+
     // Image switching 
-    function imageSwitch($tag, $imageLink='',$event=""){
-        $tag.addEventListener($event, (e)=>{
-            $tag.src = $imageLink;
-        })            
+    function imageSwitch($tags, $event = "") {
+       const  images = [
+            'https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_6.jpg?v=1741865528&width=800',
+            'https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_3.jpg?v=1741779567&width=800',
+            'https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_7.jpg?v=1741777951&width=500',
+            'https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_6.jpg?v=1741778399&width=500'
+        ]
+
+        $tags.forEach((tag, index) => {
+            const img = images[index % images.length]; // Loop if more tags than images
+            tag.addEventListener(event,() => {
+                tag.src = img;
+            });
+
+        });
+
+
     }
 
-    imageSwitch(imgFirst,'https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_6.jpg?v=1741865528&width=800','mouseenter');
-    imageSwitch(imgFirst,'https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=500','mouseleave');
+    imageSwitch(imgFirst, 'mouseenter');
+    // imageSwitch(imgFirst, 'https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_6.jpg?v=1741865528&width=800', 'mouseenter');
+    // imageSwitch(imgFirst, 'https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=500', 'mouseleave');
 
-    imageSwitch(imgSecond,'https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_3.jpg?v=1741779567&width=800','mouseenter');
-    imageSwitch(imgSecond,'https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_6.jpg?v=1741779567&width=500','mouseleave');
-	
-    imageSwitch(imgThird,'https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_7.jpg?v=1741777951&width=500','mouseenter');
-    imageSwitch(imgThird,'https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_1.jpg?v=1741777951&width=800','mouseleave');
+    // imageSwitch(imgSecond, 'https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_3.jpg?v=1741779567&width=800', 'mouseenter');
+    imageSwitch(imgSecond,  'mouseenter');
+    // imageSwitch(imgSecond, 'https://babli.in/cdn/shop/files/Evening_Blue_Strappy_Dress_6.jpg?v=1741779567&width=500', 'mouseleave');
 
-    imageSwitch(imgFourth,'https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_6.jpg?v=1741778399&width=500','mouseenter');
-    imageSwitch(imgFourth,'https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_5.jpg?v=1741778399&width=500','mouseleave');
+    imageSwitch(imgThird, 'mouseenter');
+    // imageSwitch(imgThird, 'https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_7.jpg?v=1741777951&width=500', 'mouseenter');
+    // imageSwitch(imgThird, 'https://babli.in/cdn/shop/files/Mysterious_Grey_Dress_1.jpg?v=1741777951&width=800', 'mouseleave');
 
-    
+    // imageSwitch(imgFourth, 'https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_6.jpg?v=1741778399&width=500', 'mouseenter');
+    imageSwitch(imgFourth, 'mouseenter');
+    // imageSwitch(imgFourth, 'https://babli.in/cdn/shop/files/Pinky_Red_Jacket_with_Dress_5.jpg?v=1741778399&width=500', 'mouseleave');
+
+
 
     flyOutMenuShow(womenTab, womenFlyOutMenu);
     flyOutMenuShow(menTab, menFlyOutMenu);

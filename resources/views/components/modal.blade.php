@@ -5,7 +5,7 @@
         <div id="order-summary" class="flex justify-between pb-3 cursor-pointer font-semibold ">
             <div id="order-sum" >Order Summary<span id="items"> (1 Item)</span></div>
             <div class="flex items-center">
-                <div id="price">Rs. 2350.00</div>
+                <div id="price" data-price="{{$product->price}}">₹ {{$product->price}}</div>
                 <img id="arrow" class="pl-1 w-4 pt-1 " src="https://fastrr-boost-ui.pickrr.com/assets/images/svg/down-arrow.svg" alt="Arrow down">
             </div>
         </div>
@@ -14,23 +14,23 @@
         <div id="sub-total" class="bg-rose-50 hidden p-2 mb-4 rounded-md">
             <div class="flex justify-between text-xs">
                 <div >Sub total</div>
-                <div >Rs. 2350.00</div>
+                <div >₹ {{$product->price}}</div>
             </div>
 
             <div id="coupon-discount" class=" justify-between text-green-500 text-xs mt-1 hidden">
                 <p>Coupon discount(XOXO10)</p>
-                <span>-Rs 235.00</span>
+                <span>-{{$product->price *0.1}}</span>
             </div>
 
             <div id="item" class="flex justify-between mt-6  text-xs">
                 <div class="flex">
-                    <img class="rounded-md mr-2" src="https://babli.in/cdn/shop/files/Black_Weave_Dress_With_Top_1.jpg?v=1741865528&width=50" alt="product">
+                    <img class="rounded-md mr-2 h-16" src="{{$product->images[0]}}" alt="product">
                     <div>
-                        <span>Black Weave Dress With Top - XS</span>
+                        <span>{{$product->name}}</span>
                         <span>Qty: 1</span>
                     </div>
                 </div>
-                <div id="price-per-item">Rs. 2350</div>
+                <div id="price-per-item">₹ {{$product->price}}</div>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
             </div>
 
             <div class=" flex justify-items-start text-green-800 font-semibold text-sm mt-3">
-                <p id="coupon-applied-message"> Apply coupon and save<span> Rs. 235.00</span></p>
+                <p id="coupon-applied-message"> Apply coupon and save </p><span class="ml-1"> {{$product->price *0.1}}</span>
             </div>
 
             <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>

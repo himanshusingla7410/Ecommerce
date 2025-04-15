@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const addCartbtn = document.querySelector('#add-to-cart-btn')
+    const removeCartbtn = document.querySelector('#remove-from-cart-btn')
+    const plusBtn = document.querySelector('#btn-plus');
+    const minusBtn = document.querySelector('#btn-minus');
+    const inputQty = document.querySelector('#input-qty');
+    const displayQty = document.querySelector('#qty');
+    const images = document.querySelectorAll('#thumbnail');
+    const sizeSelected = document.querySelectorAll('#size');
+    const submissionForm = document.querySelector('#product-details')
+    const deletionForm = document.querySelector('#remove-item')
+
+
 
     // Image Switching
-    const images = document.querySelectorAll('#thumbnail');
     images.forEach((i) => {
         i.addEventListener('click', (e) => {
             document.querySelector('#mainImage').src = i.src;
@@ -9,41 +20,102 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Qty Updating
-    const plusBtn = document.querySelector('#btn-plus');
-    const minusBtn = document.querySelector('#btn-minus');
-    const inputQty = document.querySelector('#qty');
-    const displayQty = document.querySelector('#input-qty');
     let qty = 1
 
     plusBtn.addEventListener('click', (e) => {
         qty += 1
-        displayQty.innerHTML = qty;
-        inputQty.value = qty;
+        displayQty.value = qty;
+        inputQty.textContent = qty;
     })
     minusBtn.addEventListener('click', (e) => {
         if (qty > 1) {
             qty -= 1
-            displayQty.innerHTML = qty;
-            inputQty.value = qty;
+            displayQty.value = qty;
+            inputQty.textContent = qty;
         }
     })
 
-    // Size selection
-    const sizeSelected = document.querySelectorAll('#size');
 
-    sizeSelected.forEach((size) => {
+    // Request to add items in cart
+    submissionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(submissionForm);
 
-        size.addEventListener('click', (e) => {
+        fetch('/product/cart', {
 
-            sizeSelected.forEach((btn) => {
-                btn.classList.remove('border-black', 'bg-indigo-600', 'text-white')
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json',
+            },
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                if (data.status === 'success') {
+                    addCartbtn.classList.add('hidden')
+                    removeCartbtn.classList.remove('hidden')
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error', error)
+                addCartbtn.classList.remove('bg-white', 'hover:bg-gray-100')
+                addCartbtn.classList.add('bg-red-600', 'hover:bg-red-500')
+                addCartbtn.innerHTML = 'Oops ! Failed to add in cart.'
             })
 
-            size.classList.toggle('border-black')
-            size.classList.toggle('bg-indigo-600')
-            size.classList.toggle('text-white')
-        });
+    })
 
-    });
+
+    // Request to remove items from cart
+    deletionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(deletionForm)
+        formData.append('_method', 'DELETE')
+        fetch('/product/cart', {
+
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.status === 'success') {
+                    removeCartbtn.classList.add('hidden')
+                    addCartbtn.classList.remove('hidden')
+                } 
+
+            })
+            .catch(error => {
+                removeCartbtn.classList.remove('bg-green-600', 'hover:bg-green-500')
+                removeCartbtn.classList.add('bg-red-600', 'hover:bg-red-500')
+                removeCartbtn.innerHTML = 'Oops ! Failed to remove from cart.'
+                console.log('Fetch error', error)
+
+            })
+
+    })
+
+
+
+
+
+
+
+
+
+
 
 })
+

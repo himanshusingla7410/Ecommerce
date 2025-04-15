@@ -18,7 +18,12 @@
 
                 @foreach ( $products as $product)
                 <a href="/product/{{$product->name}}">
-                    <img id="landing-page" src="{{ $product->images[0] }}" alt="Landing page image." class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
+                    <img id="landing-page"
+                        src="{{ $product->images[0] }}"
+                        data-original="{{$product->images[0]}}"
+                        data-pic="{{$product->images[1] ?? $product->images[0]}}"
+                        alt="Landing page image."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-900 font-bold">
@@ -51,7 +56,12 @@
 
                 @foreach ( $products1 as $product)
                 <a href="/product/{{$product->name}}">
-                    <img id="landing-page" src="{{ $product->images[0] }}" alt="Landing page image." class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
+                    <img id="landing-page"
+                        src="{{ $product->images[0] }}"
+                        data-original="{{$product->images[0]}}"
+                        data-pic="{{$product->images[1] ?? $product->images[0]}}"
+                        alt="Landing page image."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-900 font-bold">
@@ -63,7 +73,7 @@
                     </div>
                 </a>
                 @endforeach
-                
+
             </div>
             <div class="mt-5 items-center flex justify-center">
                 <a href="#" class="px-6 py-3 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition">
@@ -88,5 +98,7 @@
             <p class="text-sm">SUPPORTING LOCAL ARTISANS</p>
         </div>
     </div>
+
+
 
 </x-layout>

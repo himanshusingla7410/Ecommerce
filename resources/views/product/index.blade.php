@@ -13,61 +13,39 @@
                     <img src="{{$product->images[5]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
                 </div>
                 <div class="flex-1 sticky top-20">
-                    <img id="mainImage" src="{{$product->images[0]}}" alt="product" class="w-full h-auto rounded-xl shadow-lg"  />
+                    <img id="mainImage" src="{{$product->images[0]}}" alt="product" class="w-full h-auto rounded-xl shadow-lg" />
                 </div>
             </div>
 
 
-            <form action="/product/checkout" id="product-details" class="px-5 pt-8">
-                @method('POST')
+            <form method="POST" action="/product/cart" id="product-details" class="px-5 pt-8">
                 @csrf
                 <!-- Right Product Detail Section -->
                 <div class="flex flex-col gap-4 sticky top-20">
                     <input name="product_name" type="hidden" value="{{$product->name}}">
-                    <input name="product_price" type="hidden" value="{{$product->price}}" >
+                    <input name="product_price" type="hidden" value="{{$product->price}}">
+                    <input name="product_image" type="hidden" value="{{$product->images[0]}}">
                     <h1 class="text-2xl font-semibold">{{$product->name}}</h1>
                     <P class="text-xl font-medium text-gray-600">₹ {{$product->price}}</P>
 
                     <!-- Size Selector -->
                     <div class="flex gap-2">
+                        @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'] as $size)
                         <label>
-                            <input type="hidden" id="input-size" name="product_size" value="XS" required>
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">XS</span>
+                            <input type="radio" name="product_size" value="{{ $size }}" required class="hidden peer">
+                            <span class="peer-checked:bg-black peer-checked:text-white px-3 py-1 border rounded cursor-pointer">{{ $size }}</span>
                         </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="S">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">S</span>
-                        </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="M">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">M</span>
-                        </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="L">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">L</span>
-                        </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="XL">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">XL</span>
-                        </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="XXL">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">XXL</span>
-                        </label>
-                        <label>
-                            <input type="hidden" id="input-size" name="product_size" value="3XL">
-                            <span id="size" class="px-3 py-1 border rounded cursor-pointer">3XL</span>
-                        </label>
+                        @endforeach
 
                     </div>
 
-                    <!-- Add to Cart & Buy Now Buttons -->
+                    <!-- Add/Remove to Cart & Buy Now Buttons -->
                     <div class="flex flex-col gap-2">
-                        <button class="w-full bg-white border border-gray-800 text-black py-2 rounded-lg hover:bg-gray-100 transition">Add to cart</button>
+                        <button id="add-to-cart-btn" type="submit" class="w-full bg-white border border-gray-800 text-black py-2 rounded-lg hover:bg-gray-100 transition">Add to cart</button>
+                        <button form="remove-item" id="remove-from-cart-btn" type="submit" class=" hidden w-full bg-green-600 border border-gray-800 text-black py-2 rounded-lg hover:bg-green-500 transition">Item added to cart</button>
+
                         <button id="buy-btn" type="button" class="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
                             BUY NOW
-                            <!-- <img src="gpay-icon.png" alt="Gpay" class="w-5 h-5" /> -->
-                            <!-- <img src="paytm-icon.png" alt="Paytm" class="w-5 h-5" /> -->
                         </button>
                     </div>
 
@@ -87,6 +65,12 @@
                         </div>
                     </div>
                 </div>
+            </form>
+            <form action="/product/cart" id="remove-item">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="product_name" value="{{$product->name}}">
+
             </form>
         </div>
 
@@ -117,7 +101,6 @@
 
     <x-modal :product="$product"></x-modal>
 
-    
 
     @push('scripts')
     @vite(['resources/js/productView.js'])

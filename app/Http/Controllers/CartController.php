@@ -10,6 +10,18 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
 
+    public function index(){
+
+
+        
+
+
+    }
+
+
+
+
+
     public function store()
     {
 
@@ -34,10 +46,12 @@ class CartController extends Controller
             'product_image' => request('product_image'),
         ]);
 
-        
+        $cartCount = Cart::where('ip_address', request()->ip())->distinct('product_id')->count('product_id');
+                    
         return response()->json([
             'status'=> 'success',
-            'message'=> 'Item added to cart !'
+            'message'=> 'Item added to cart !',
+            'cartCount'=> $cartCount
         ]);     
 
     }   
@@ -53,9 +67,12 @@ class CartController extends Controller
             ->where('product_name', request('product_name'))
             ->delete();
 
+        $cartCount = Cart::where('ip_address', request()->ip())->distinct('product_id')->count('product_id');
+        
         return response()->json([
             'status'=> 'success',
-            'message'=> 'Item removed from cart'
+            'message'=> 'Item removed from cart',
+            'cartCount'=> $cartCount
         ]);
 
 

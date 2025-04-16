@@ -185,7 +185,7 @@
                 </div>
             </div>
 
-            <a href="/" class=" ml-auto flex items-baseline-center justify-center text-5xl mt-5 text-red-500 font-medium"  style="font-family: 'Allura';">DILkash</a>
+            <a href="/" class=" ml-auto flex items-baseline-center justify-center text-5xl mt-5 text-red-500 font-medium" style="font-family: 'Allura';">DILkash</a>
 
             <div class="ml-auto flex items-center">
                 <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -205,12 +205,14 @@
                 </div>
 
                 <!-- Cart -->
-                <div class="ml-4 flow-root lg:ml-6">
+                <div class="ml-4 flow-root lg:ml-6 ">
                     <a href="#" class="group -m-2 flex items-center p-2">
-                        <svg class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                        </svg>
-                        <span id="cart-items-count" class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                        <div class="relative">
+                            <svg class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <span id="cart-black-dot" class=" {{$cartCount > 0 ? 'opacity-100' : 'opacity-0'}}  absolute top-0 right-0 block  rounded-full ring-1 ring-black h-2 w-2 bg-black"></span>
+                        </div>
                         <span class="sr-only">items in cart, view bag</span>
                     </a>
                 </div>

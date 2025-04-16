@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sizeSelected = document.querySelectorAll('#size');
     const submissionForm = document.querySelector('#product-details')
     const deletionForm = document.querySelector('#remove-item')
-
+    const blackDot = document.querySelector('#cart-black-dot')
 
 
     // Image Switching
@@ -35,6 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    // Cart black dot visibility
+    function cartDotVisibility ($cartCount =0){
+
+        if ($cartCount > 0) {
+            blackDot.classList.replace('opacity-0', 'opacity-100');
+        } else {
+            blackDot.classList.replace('opacity-100', 'opacity-0');
+        }
+
+    }
+
 
     // Request to add items in cart
     submissionForm.addEventListener('submit', (e) => {
@@ -59,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
 
                 if (data.status === 'success') {
+                    cartDotVisibility(data.cartCount);
                     addCartbtn.classList.add('hidden')
                     removeCartbtn.classList.remove('hidden')
                 }
@@ -92,9 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
 
                 if (data.status === 'success') {
+                    cartDotVisibility(data.cartCount);
                     removeCartbtn.classList.add('hidden')
                     addCartbtn.classList.remove('hidden')
-                } 
+                }
 
             })
             .catch(error => {

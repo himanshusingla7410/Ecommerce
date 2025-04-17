@@ -2,10 +2,10 @@
 
     <section>
         <div class="relative pt-8">
-            <img src="	https://babli.in/cdn/shop/files/11_9918ed89-b59a-426b-9afc-ccc67305cb62.jpg?v=1742564273&width=2000" alt="Models sitting back to back, wearing Basic Tee in black and bone." class="w-full h-150 aspect-square rounded-lg shadow-md">
+            <img src="	https://babli.in/cdn/shop/files/11_9918ed89-b59a-426b-9afc-ccc67305cb62.jpg?v=1742564273&width=2000" alt="Model siting." class="w-full h-150 aspect-square rounded-lg shadow-md">
         </div>
         <div class="mt-5 items-center flex justify-center">
-            <a href="#" class="px-6 py-3 bg-indigo-600 text-white text-lg font-semibold rounded-md shadow-md hover:bg-indigo-700 transition">
+            <a href="/products" class="px-6 py-3 bg-indigo-600 text-white text-lg font-semibold rounded-md shadow-md hover:bg-indigo-700 transition">
                 SHOP NOW
             </a>
         </div>
@@ -38,14 +38,14 @@
 
             </div>
             <div class="mt-5 items-center flex justify-center">
-                <a href="#" class="px-6 py-3 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition">
+                <a href="/products" class="px-6 py-3 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition">
                     View all
                 </a>
             </div>
 
         </div>
         <div>
-            <img src="	https://babli.in/cdn/shop/files/DEC-BANNER-1.jpg?v=1702276496&width=1400" alt="Models sitting back to back, wearing Basic Tee in black and bone." class="w-full h-125 aspect-square rounded-lg shadow-md">
+            <img src="	https://babli.in/cdn/shop/files/DEC-BANNER-1.jpg?v=1702276496&width=1400" alt="Models posing." class="w-full h-125 aspect-square rounded-lg shadow-md">
         </div>
 
 
@@ -76,14 +76,14 @@
 
             </div>
             <div class="mt-5 items-center flex justify-center">
-                <a href="#" class="px-6 py-3 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition">
+                <a href="/products" class="px-6 py-3 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition">
                     View all
                 </a>
             </div>
 
         </div>
     </section>
-
+    <!-- Three icons at bottom -->
     <div class="flex justify-center  gap-40 mt-12 mb-12 items-baseline-last text-center">
         <div class="flex flex-col items-center space-y-5">
             <img src="https://babli.in/cdn/shop/files/4_0b831116-8dab-4548-a042-6c757d71a2f6.png?v=1698318177&width=97" alt="HANDMADE">

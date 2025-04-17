@@ -2,34 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Product;
-use Illuminate\Support\Facades\Request;
 
 class ProductController extends Controller
 {
 
-    public function index()
+    public function welcome()
     {
-        
         $products = Product::select('name', 'price', 'images')->limit(4)->get();
         $products1 = Product::select('name', 'price', 'images')->limit(4)->offset(4)->get();
 
-        return view('index.welcome', compact('products', 'products1'));
+        return view('welcome', compact('products', 'products1'));
     }
+
+    public function index()
+    {
+
+        $products =Product::all(['name', 'price','images']);
+
+        // dd($products);
+
+
+
+
+
+        return view('product.index', compact('products'));
+    }
+
 
     public  function show($name)
     {
         $product = Product::where('name', $name)->first();
 
-        return view('product.index', compact('product'));
+        return view('product.show', compact('product'));
     }
-
-
-    public  function store(Request $request)
-    {
-       
-    }
-
-    public  function checkout() {}
 }

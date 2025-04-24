@@ -17,22 +17,24 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 border-b border-gray-300">
-                        @foreach( $items as $item)
+                        @foreach( $products as $item)
                         <tr>
                             <td class="px-6 py-4 flex items-start gap-4">
                                 <img class="rounded-md w-24 h-auto" src="{{$item->product_image}}" alt="">
                                 <div class="p-1">
-                                    <div class="font-semibold">{{$item->product_name}}</div>
+                                    <div class="product font-semibold">{{$item->product_name}}</div>
                                     <div class="text-gray-500">₹ {{$item->product_price}}</div>
                                     <div class="text-s text-gray-400">{{$item->product_size}}</div>
                                 </div>
                             </td>
-                            <td class="text-center align-middle">
+                            <td id="qty-control" class="text-center align-middle">
+                                 <!-- Quantity controls -->
                                 <div class="inline-flex border border-gray-400 items-center justify-between w-24 mx-auto py-2 ">
-                                    <button class="px-2">-</button>
-                                    <span>{{$item->product_quantity}}</span>
-                                    <button class="px-2">+</button>
+                                    <button id="minus-btn" class="px-2 cursor-pointer">-</button>
+                                    <span id="qty-value" data-qty="{{$item->product_quantity}}">{{$item->product_quantity}}</span>
+                                    <button id="plus-btn" class="px-2 cursor-pointer">+</button>
                                 </div>
+                                 <!-- Form to remove items -->
                                 <form action="/cart/delete" class="flex justify-center">
                                     @csrf
                                     @method('DELETE')
@@ -41,8 +43,8 @@
                                     <button type="submit" class=" mt-1 underline cursor-pointer">Remove</button>
                                 </form>
                             </td>
-                            <td class="text-center align-middle">
-                                ₹ {{$item->product_price * $item->product_quantity}}
+                            <td   class="text-center align-middle">
+                                ₹ <span id="price">{{$item->product_price }}</span>
                             </td>
                         </tr>
                         @endforeach
@@ -56,10 +58,10 @@
                         <textarea class="border border-gray-300 w-100 h-25 p-3 mt-1" type="text" name="order_note" value="" placeholder="How can we help you?"></textarea>
                     </div>
                     <div class="text-end">
-                        <p class="text-end align-end px-10 text-xl">Total: <span class="ml-5">0</span></p>
+                        <p class="text-end align-end px-10 text-xl">Total: ₹<span id="totalOrderValue" class="ml-2" data-price="{{$totalOrderValue}}" >{{$totalOrderValue}}</span></p>
                         <p class="text-gray-600 text-s">Tax included. Shipping calculated at checkout.</p>
                         <div class="ml-55 px-10 py-3">
-                            <button id="" type="button" class=" w-24 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
+                            <button id="buy-btn" type="button" class=" w-24 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
                                 BUY NOW
                             </button>
                         </div>
@@ -98,12 +100,13 @@
             </div>
 
         </div>
-
+        <x-modal :products="$products"  :totalOrderValue="$totalOrderValue"></x-modal>
 
     </section>
 
     @push('scripts')
-    @vite(['resources/js/productView.js'])
+    @vite(['resources/js/modal.js'])
+    @vite(['resources/js/cart.js'])
     @endpush
 
 

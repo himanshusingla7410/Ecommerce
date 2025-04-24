@@ -3,37 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\OrderService;
 
 class ProductController extends Controller
 {
 
     public function welcome()
     {
-        $products = Product::select('name', 'price', 'images')->limit(4)->get();
-        $products1 = Product::select('name', 'price', 'images')->limit(4)->offset(4)->get();
+        $products = Product::select('product_name', 'product_price', 'product_image')->limit(4)->get();
+        $products1 = Product::select('product_name', 'product_price', 'product_image')->limit(4)->offset(4)->get();
+
 
         return view('welcome', compact('products', 'products1'));
+        
     }
 
     public function index()
     {
 
-        $products =Product::all(['name', 'price','images']);
-
-        // dd($products);
-
-
-
+        $products = Product::select('product_name', 'product_price', 'product_image')
+            ->inRandomOrder()
+            ->paginate(8);
+        $count = Product::all()->count();
 
 
-        return view('product.index', compact('products'));
+
+        return view('product.index', compact('products', 'count'));
     }
 
 
-    public  function show($name)
+    public  function show($product_name, OrderService $orderservice)
     {
-        $product = Product::where('name', $name)->first();
+        $products = Product::where('product_name', $product_name)->get();
+        $totalOrderValue = $orderservice->calculateOrderValue($products);
 
-        return view('product.show', compact('product'));
+        return view('product.show', compact('products','totalOrderValue'));
     }
+   
 }

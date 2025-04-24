@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const plusBtn = document.querySelector('#btn-plus');
     const minusBtn = document.querySelector('#btn-minus');
     const inputQty = document.querySelector('#input-qty');
-    const displayQty = document.querySelector('#qty');
+    const displayQty = document.querySelector('#qty-value');
     const images = document.querySelectorAll('#thumbnail');
     const sizeSelected = document.querySelectorAll('#size');
     const submissionForm = document.querySelector('#product-details')
@@ -24,19 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     plusBtn.addEventListener('click', (e) => {
         qty += 1
-        displayQty.value = qty;
+        displayQty.textContent = qty;
         inputQty.textContent = qty;
+        displayQty.setAttribute('data-qty', qty)
     })
     minusBtn.addEventListener('click', (e) => {
         if (qty > 1) {
             qty -= 1
-            displayQty.value = qty;
+            displayQty.textContent = qty;
             inputQty.textContent = qty;
+            displayQty.setAttribute('data-qty', qty)
+
         }
     })
 
     // Cart black dot visibility
-    function cartDotVisibility ($cartCount =0){
+    function cartDotVisibility($cartCount = 0) {
 
         if ($cartCount > 0) {
             blackDot.classList.replace('opacity-0', 'opacity-100');
@@ -90,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const formData = new FormData(deletionForm)
+        console.log(deletionForm);
         formData.append('_method', 'DELETE')
         fetch('/product/cart', {
 

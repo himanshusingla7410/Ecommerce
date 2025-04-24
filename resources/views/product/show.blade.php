@@ -2,18 +2,19 @@
 
     <section class="relative pt-30 px-10">
         <!-- Product Review Page -->
+         @foreach ($products as $product)
         <div class="product-page grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
             <!-- Left Image Section -->
             <div class="sticky top-20 flex gap-4 h-fit">
                 <div class="flex flex-col gap-2 overflow-y-auto max-h-[600px]">
-                    <img src="{{$product->images[1]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="{{$product->images[2]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="{{$product->images[3]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="{{$product->images[4]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
-                    <img src="{{$product->images[5]}}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->product_image[1] ?? $product->product_image[0] }} " id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->product_image[2] ?? $product->product_image[0] }}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->product_image[3] ?? $product->product_image[0] }}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->product_image[4] ?? $product->product_image[0] }}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
+                    <img src="{{$product->product_image[5] ?? $product->product_image[0] }}" id="thumbnail" alt="thumb" class="w-16 h-24 object-cover rounded-lg cursor-pointer border" />
                 </div>
                 <div class="flex-1 sticky top-20">
-                    <img id="mainImage" src="{{$product->images[0]}}" alt="product" class="w-full h-auto rounded-xl shadow-lg" />
+                    <img id="mainImage" src="{{$product->product_image[0]}}" alt="product" class="w-full h-auto rounded-xl shadow-lg" />
                 </div>
             </div>
 
@@ -22,17 +23,17 @@
                 @csrf
                 <!-- Right Product Detail Section -->
                 <div class="flex flex-col gap-4 sticky top-20">
-                    <input name="product_name" type="hidden" value="{{$product->name}}">
-                    <input name="product_price" type="hidden" value="{{$product->price}}">
-                    <input name="product_image" type="hidden" value="{{$product->images[0]}}">
-                    <h1 class="text-2xl font-semibold">{{$product->name}}</h1>
-                    <P class="text-xl font-medium text-gray-600">₹ {{$product->price}}</P>
+                    <input name="product_name" type="hidden" value="{{$product->product_name}}">
+                    <input name="product_price" type="hidden" value="{{$product->product_price}}">
+                    <input name="product_image" type="hidden" value="{{$product->product_image[0]}}">
+                    <h1 class=" product text-2xl font-semibold">{{$product->product_name}}</h1>
+                    <P  id= "totalOrderValue" class="text-xl font-medium text-gray-600" data-price="{{$totalOrderValue}}">₹ {{$product->product_price}}</P>
 
                     <!-- Size Selector -->
                     <div class="flex gap-2">
-                        @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'] as $size)
+                        @foreach($product->product_sizes as $size)
                         <label>
-                            <input type="radio" name="product_size" value="{{ $size }}" required class="hidden peer">
+                            <input type="radio" name="product_size" value="{{ $size }}" required class="sr-only peer">
                             <span class="peer-checked:bg-black peer-checked:text-white px-3 py-1 border rounded cursor-pointer">{{ $size }}</span>
                         </label>
                         @endforeach
@@ -59,8 +60,8 @@
                         </a>
                         <div class="flex items-center gap-2">
                             <button id="btn-minus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 ">-</button>
-                            <input id="input-qty" type="hidden" name="product_quantity" value="1">
-                            <span id="qty">1</span>
+                            <input id="input-qty" type="hidden" name="product_quantity" value="{{$product->product_quantity}}">
+                            <span id="qty-value" data-qty = "{{$product->product_quantity}}">{{$product->product_quantity ?? 1}}</span>
                             <button id="btn-plus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 ">+</button>
                         </div>
                     </div>
@@ -69,12 +70,12 @@
             <form action="/product/cart" id="remove-item">
                 @csrf
                 @method('DELETE')
-                <input type="hidden" name="product_name" value="{{$product->name}}">
+                <input type="hidden" name="product_name" value="{{$product->product_name}}">
                 <input type="hidden" name="product_size" value="{{$product->size}}">
 
             </form>
         </div>
-
+        @endforeach
 
 
         <!-- Additional Info Section -->
@@ -100,7 +101,7 @@
         </div>
     </section>
 
-    <x-modal :product="$product"></x-modal>
+    <x-modal :products="$products" :totalOrderValue="$totalOrderValue"></x-modal>
 
 
     @push('scripts')

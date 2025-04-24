@@ -42,7 +42,7 @@
                 </button>
             </div>
 
-            <div class=" text-s">296 products</div>
+            <div class=" text-s">{{$count}} products</div>
             <div class=" items-center p-2 border-l border-gray-400">Sort by</div>
         </div>
 
@@ -71,16 +71,16 @@
             <section class="flex-1 grid grid-cols-4 gap-10">
                 <!-- Block for each product -->
                 @foreach ($products as $product)
-                <a href="/product/{{$product->name}}" class="overflow-hidden rounded-md shadow hover:shadow-lg transition">
+                <a href="/product/{{$product->product_name}}" class="overflow-hidden rounded-md shadow hover:shadow-lg transition">
                     <img id="landing-page"
-                        src="{{$product->images[0]}}"
-                        data-original="{{$product->images[0]}}"
-                        data-pic="{{$product->images[2] ?? $product->images[0]}}"
+                        src="{{$product->product_image[0]}}"
+                        data-original="{{$product->product_image[0]}}"
+                        data-pic="{{$product->product_image[2] ?? $product->product_image[0]}}"
                         alt="Product 1"
                         class="w-full h-auto object-cover" />
                     <div class=" text-center py-2 font-semibold">
-                        <p class="">{{$product->name}}</p>
-                        <p class=" text-gray-400 text-s">₹ {{$product->price}}</p>
+                        <p class="">{{$product->product_name}}</p>
+                        <p class=" text-gray-400 text-s">₹ {{$product->product_price}}</p>
                     </div>
                 </a>
                 @endforeach
@@ -88,14 +88,11 @@
         </div>
 
 
-
-
-
-
-
-
-
+        <div class="px-8 py-8">
+            {{ $products->links() }}
+        </div>
     </section>
+
 
 
     @push('scripts')

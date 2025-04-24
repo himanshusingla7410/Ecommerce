@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Services\OrderService;
+
+
 
 class CartController extends Controller
 {
 
-    public function index()
+    public function index(OrderService $orderservice)
     {
-        $items = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
+        $products = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
             ->where('ip_address', request()->ip())
             ->distinct()
             ->get();
+            
+        $totalOrderValue = $orderservice->calculateOrderValue();
 
-        return $items->isNotEmpty() ? view('cart.index', compact('items')) : view('cart.empty');
+        return $products->isNotEmpty() ? view('cart.index', compact('products','totalOrderValue')) : view('cart.empty');
     }
 
 
@@ -35,7 +40,7 @@ class CartController extends Controller
 
         $item = Cart::firstOrNew([
             'ip_address' => request()->ip(),
-            'product_id' => Product::where('name', request('product_name'))->first()->id,
+            'product_id' => Product::where('product_name', request('product_name'))->first()->id,
             'product_name' => request('product_name'),
             'product_size' => request('product_size'),
             'product_price' => request('product_price'),
@@ -53,26 +58,30 @@ class CartController extends Controller
         ]);
     }
 
-    public function destroy()
+    public function destroy(OrderService $orderservice)
     {
         request()->validate([
             'product_name' => 'required|string|max:255',
             'product_size' => 'required | string | in:XS,S,M,L,XL,XXL,3XL'
         ]);
-
+        
         Cart::where('ip_address', request()->ip())
             ->where('product_name', request('product_name'))
             ->where('product_size', request('product_size'))
             ->delete();
 
+
+        $totalOrderValue = $orderservice->calculateOrderValue();
+
         $cartCount = Cart::where('ip_address', request()->ip())->distinct('product_id')->count('product_id');
-        $items = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
+
+        $products = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
             ->where('ip_address', request()->ip())
             ->distinct()
             ->get();
         
         if ( route('cart.delete')){
-            return $items->isNotEmpty() ?  view('cart.index',compact('items')) : view('cart.empty');
+            return $products->isNotEmpty() ?  view('cart.index',compact('products','totalOrderValue')) : view('cart.empty');
         }else{
             return response()->json([
                 'status' => 'success',

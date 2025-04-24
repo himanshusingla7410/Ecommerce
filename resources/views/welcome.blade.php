@@ -17,21 +17,21 @@
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                 @foreach ( $products as $product)
-                <a href="/product/{{$product->name}}">
+                <a href="/product/{{$product->product_name}}">
                     <img id="landing-page"
-                        src="{{ $product->images[0] }}"
-                        data-original="{{$product->images[0]}}"
-                        data-pic="{{$product->images[1] ?? $product->images[0]}}"
+                        src="{{ $product->product_image[0] }}"
+                        data-original="{{$product->product_image[0]}}"
+                        data-pic="{{$product->product_image[1] ?? $product->product_image[0]}}"
                         alt="Landing page image."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-900 font-bold">
                                 <span aria-hidden="true" class="absolute inset-0"></span>
-                                {{ $product->name }}
+                                {{ $product->product_name }}
                             </h3>
                         </div>
-                        <p class="text-sm font-medium text-gray-700">₹ {{$product->price}}</p>
+                        <p class="text-sm font-medium text-gray-700">₹ {{$product->product_price}}</p>
                     </div>
                 </a>
                 @endforeach
@@ -55,21 +55,21 @@
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                 @foreach ( $products1 as $product)
-                <a href="/product/{{$product->name}}">
+                <a href="/product/{{$product->product_name}}">
                     <img id="landing-page"
-                        src="{{ $product->images[0] }}"
-                        data-original="{{$product->images[0]}}"
-                        data-pic="{{$product->images[1] ?? $product->images[0]}}"
+                        src="{{ $product->product_image[0] }}"
+                        data-original="{{$product->product_image[0]}}"
+                        data-pic="{{$product->product_image[1] ?? $product->product_image[0]}}"
                         alt="Landing page image."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-900 font-bold">
                                 <span aria-hidden="true" class="absolute inset-0"></span>
-                                {{ $product->name }}
+                                {{ $product->product_name }}
                             </h3>
                         </div>
-                        <p class="text-sm font-medium text-gray-700">₹ {{$product->price}}</p>
+                        <p class="text-sm font-medium text-gray-700">₹ {{$product->product_price}}</p>
                     </div>
                 </a>
                 @endforeach

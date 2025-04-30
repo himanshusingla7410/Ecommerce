@@ -25,9 +25,9 @@
                 <div class="flex flex-col gap-4 sticky top-20">
                     <input name="product_name" type="hidden" value="{{$product->product_name}}">
                     <input name="product_price" type="hidden" value="{{$product->product_price}}">
-                    <input name="product_image" type="hidden" value="{{$product->product_image[0]}}">
+                    <input name="product_image" type="hidden" value="{{$product->product_image[rand(0,4)]}}">
                     <h1 class=" product text-2xl font-semibold">{{$product->product_name}}</h1>
-                    <P  id= "totalOrderValue" class="text-xl font-medium text-gray-600" data-price="{{$totalOrderValue}}">₹ {{$product->product_price}}</P>
+                    <span class="text-xl font-medium text-gray-600" >₹ <span id= "totalOrderValue" data-price="{{$totalOrderValue}}">{{$product->product_price}}</span></span>
 
                     <!-- Size Selector -->
                     <div class="flex gap-2">
@@ -59,10 +59,10 @@
                             Size Chart
                         </a>
                         <div class="flex items-center gap-2">
-                            <button id="btn-minus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 ">-</button>
-                            <input id="input-qty" type="hidden" name="product_quantity" value="{{$product->product_quantity}}">
+                            <button id="btn-minus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 cursor-pointer ">-</button>
+                            <input id="input-qty" type="hidden" name="product_quantity" value="1">
                             <span id="qty-value" data-qty = "{{$product->product_quantity}}">{{$product->product_quantity ?? 1}}</span>
-                            <button id="btn-plus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 ">+</button>
+                            <button id="btn-plus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 cursor-pointer ">+</button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,6 @@
 
     @push('scripts')
     @vite(['resources/js/productView.js'])
-    @vite(['resources/js/modal.js'])
     @endpush
 
 

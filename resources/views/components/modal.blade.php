@@ -3,36 +3,38 @@
 
         <!-- Order Summary -->
         <div id="order-summary" class="flex justify-between pb-3 cursor-pointer font-semibold ">
-            <div id="order-sum" >Order Summary<span id="items"> (1 Item)</span></div>
+            <div id="order-sum">Order Summary</div>
             <div class="flex items-center">
-                <div  id="modal-total-price" >{{$totalOrderValue}}</div>
+                <div id="modal-total-price">{{$totalOrderValue}}</div>
                 <img id="arrow" class="pl-1 w-4 pt-1 " src="https://fastrr-boost-ui.pickrr.com/assets/images/svg/down-arrow.svg" alt="Arrow down">
             </div>
         </div>
 
         <!-- Sub summary -->
-        <div id="sub-total" class="bg-rose-50 hidden p-2 mb-4 rounded-md" >
+        <div id="sub-total" class="bg-rose-50 hidden p-2 mb-4 rounded-md ">
             <div class="flex justify-between text-xs">
-                <div >Sub total</div>
-                <div id ="modal-sub-total-price">{{$totalOrderValue}}</div>
+                <div>Sub total</div>
+                <div id="modal-sub-total-price">{{$totalOrderValue}}</div>
             </div>
 
             <div id="coupon-discount" class=" justify-between text-green-500 text-xs mt-1 hidden">
                 <p>Coupon discount(XOXO10)</p>
                 <span id="coupon-discount-amt">-{{$totalOrderValue *0.1}} </span>
             </div>
-            @foreach ( $products as $product)
-            <div id="item" class="flex justify-between mt-6  text-xs" data-productname="{{$product->product_name }}">
-                <div class="flex">
-                    <img class="rounded-md mr-2 h-16" src="{{$product->product_image[0]}}" alt="product">
-                    <div>
-                        <span class="product-name">{{$product->product_name }}</span>
-                        <span>Qty:</span> <span class="qty">{{$product->product_quantity}}</span> 
+            <div class="max-h-60 overflow-y-auto ml-2 mt-2">
+                @foreach ( $products as $product)
+                <div id="item" class="flex justify-between mt-6  text-xs mr-2 border-b border-gray-300" data-productname="{{$product->product_name }}">
+                    <div class="flex">
+                        <img class="rounded-md mr-2 h-16" src="{{$product->product_image[0]}}" alt="product">
+                        <div>
+                            <span class="product-name">{{$product->product_name }}</span>
+                            <span>Qty:</span> <span class="qty">{{$product->product_quantity}}</span>
+                        </div>
                     </div>
+                    <div id="price-per-item">₹ {{$product->product_price }}</div>
                 </div>
-                <div id="price-per-item">₹ {{$product->product_price }}</div>
+                @endforeach
             </div>
-            @endforeach
         </div>
 
         <!-- Coupon Summary -->
@@ -49,14 +51,17 @@
             </div>
 
             <div class=" flex justify-items-start text-green-800 font-semibold text-sm mt-3">
-                <p id="coupon-applied-message"> Apply coupon and save </p><span id="coupon-saving-amt" class="ml-1"> {{$totalOrderValue  *0.1}}</span>
+                <p id="coupon-applied-message"> Apply coupon and save </p><span id="coupon-saving-amt" class="ml-1"> {{$totalOrderValue *0.1}}</span>
             </div>
 
             <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>
 
-            <button class="text-sm px-3 py-1 font-semibold text-gray-600 mt-2 cursor-pointer">
+            <button type="button" id="view-coupons" data-value="{{$totalOrderValue}}" class="text-sm px-3 py-1 font-semibold text-gray-600 mt-2 cursor-pointer">
                 View all coupons >
             </button>
+            <div id="applicable-coupons" class="overflow-y-auto max-h-70 hidden">
+                
+            </div>
         </div>
 
         <!-- Phone number input -->

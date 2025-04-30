@@ -18,12 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     buyBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
-        updatingOrderAmt('#modal-total-price', document.querySelector('#qty-value')?.dataset.qty ?? 1 )
+        updatingOrderAmt('#modal-total-price' )
         updatingOrderAmt('#modal-sub-total-price')
         updatingOrderAmt('#coupon-discount-amt', -0.1)
         updatingOrderAmt('#coupon-saving-amt', 0.1)
-        updatingQty()
-
+        updatingQty('#totalOrderValue', document.querySelector('#qty-value').dataset.qty)
     })
 
     // Closing modal
@@ -54,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updatingOrderAmt('#modal-total-price', 0.9)
         couponDiscount.classList.add('flex')
         couponDiscount.classList.remove('hidden')
+
     })
 
     // Remove coupon
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         couponDiscount.classList.add('hidden')
     })
 
-
+    // Updating amount of individual product
     function updatingOrderAmt(element, mutliplier = 1) {
 
         const price = document.querySelector('#totalOrderValue').getAttribute('data-price')

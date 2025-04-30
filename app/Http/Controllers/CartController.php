@@ -31,8 +31,8 @@ class CartController extends Controller
 
             'product_name' => 'bail | required | string | max:255',
             'product_size' => 'required | string | in:XS,S,M,L,XL,XXL,3XL',
-            'product_quantity' => 'required | integer | min:1',
-            'product_price' => 'required | integer | min:0',
+            'product_quantity' => 'required | integer | min:1 | max:10' ,
+            'product_price' => 'required | integer | min:0 ',
             'product_image' => 'required | url'
 
         ]);

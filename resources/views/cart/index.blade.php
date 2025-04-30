@@ -105,7 +105,6 @@
     </section>
 
     @push('scripts')
-    @vite(['resources/js/modal.js'])
     @vite(['resources/js/cart.js'])
     @endpush
 

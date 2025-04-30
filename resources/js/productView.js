@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submissionForm = document.querySelector('#product-details')
     const deletionForm = document.querySelector('#remove-item')
     const blackDot = document.querySelector('#cart-black-dot')
+    const individualItemPrice = document.querySelector('#totalOrderValue')
 
 
     // Image Switching
@@ -25,16 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     plusBtn.addEventListener('click', (e) => {
         qty += 1
         displayQty.textContent = qty;
-        inputQty.textContent = qty;
+        inputQty.value = qty ;
+        console.log(inputQty.value)
         displayQty.setAttribute('data-qty', qty)
+        individualItemPrice.setAttribute('data-price', individualItemPrice.innerHTML * qty)
     })
     minusBtn.addEventListener('click', (e) => {
         if (qty > 1) {
             qty -= 1
             displayQty.textContent = qty;
-            inputQty.textContent = qty;
+            inputQty.value = qty ;
+            console.log(inputQty.value)
             displayQty.setAttribute('data-qty', qty)
-
+            individualItemPrice.setAttribute('data-price', individualItemPrice.textContent * qty)
+            console.log(inputQty.textContent)
         }
     })
 

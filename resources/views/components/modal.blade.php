@@ -18,7 +18,7 @@
             </div>
 
             <div id="coupon-discount" class=" justify-between text-green-500 text-xs mt-1 hidden">
-                <p>Coupon discount(XOXO10)</p>
+                <p id="sub-coupon-code">Coupon discount(XOXO10)</p>
                 <span id="coupon-discount-amt">-{{$totalOrderValue *0.1}} </span>
             </div>
             <div class="max-h-60 overflow-y-auto ml-2 mt-2">
@@ -53,14 +53,13 @@
             <div class=" flex justify-items-start text-green-800 font-semibold text-sm mt-3">
                 <p id="coupon-applied-message"> Apply coupon and save </p><span id="coupon-saving-amt" class="ml-1"> {{$totalOrderValue *0.1}}</span>
             </div>
+            <div class="view-coupon-container">
+                <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>
 
-            <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>
-
-            <button type="button" id="view-coupons" data-value="{{$totalOrderValue}}" class="text-sm px-3 py-1 font-semibold text-gray-600 mt-2 cursor-pointer">
-                View all coupons >
-            </button>
-            <div id="applicable-coupons" class="overflow-y-auto max-h-70 hidden">
-                
+                <button type="button" id="view-coupons" data-value="{{$totalOrderValue}}" class="text-sm px-3 py-1 font-semibold text-gray-600 mt-2 cursor-pointer">
+                    View all coupons >
+                </button>
+                <div id="applicable-coupons" class="overflow-y-auto max-h-70 hidden"></div>
             </div>
         </div>
 

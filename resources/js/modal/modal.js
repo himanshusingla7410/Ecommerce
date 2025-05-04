@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const arrow = document.querySelector('#arrow')
     const couponDiscount = document.querySelector('#coupon-discount')
     const productName = document.querySelectorAll('.product')
-
+    const couponContainer =  document.querySelector('.view-coupon-container')
 
     // Displaying modal
     buyBtn.addEventListener('click', () => {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updatingOrderAmt('#modal-total-price', 0.9)
         couponDiscount.classList.add('flex')
         couponDiscount.classList.remove('hidden')
-
+        couponContainer.classList.add('hidden')
     })
 
     // Remove coupon
@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
         updatingOrderAmt('#modal-total-price')
         couponDiscount.classList.remove('flex')
         couponDiscount.classList.add('hidden')
+        couponContainer.classList.remove('hidden')
+
     })
 
     // Updating amount of individual product

@@ -6,49 +6,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.cacheDOM();
             this.listenForEvents();
+            this.setObserver()
 
+        },
+
+        setObserver() {
+
+            this.observer = new IntersectionObserver((entries) => {
+
+                entries.forEach((e) => {
+                    if (e.isIntersecting) {
+                        this.preloadCoupons()
+                        this.observer.unobserve(e.target)
+                    }
+
+                })
+            }, { threshold: 0.50 })
+
+            if (this.viewCoupons) {
+                this.observer.observe(this.viewCoupons)
+            }
         },
 
         cacheDOM() {
 
             this.coupon = document.querySelector('#view-coupons')
+            this.viewCoupons = document.querySelector('#applicable-coupons')
+            this.couponContainer = document.querySelector('.view-coupon-container')
+            this.subCouponCode = document.querySelector('#sub-coupon-code')
+            this.subCouponDiscount = document.querySelector('#coupon-discount-amt')
+            this.subCouponDisplay = document.querySelector('#coupon-discount')
 
         },
+
+        async preloadCoupons() {
+
+            const value = this.coupon.dataset.value
+
+            if (!value) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/coupon?orderValue=${value}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    }
+                })
+
+                if (!response.ok) {
+                    throw new Error(await response.text())
+                }
+
+                const data = await response.json()
+
+                if (data.status === 'success') {
+                    this.addingCoupons(data.data)
+                }
+            }
+            catch (error) {
+                console.error('Failed to preload', error)
+            }
+        },
+
 
         listenForEvents() {
 
-            this.coupon.addEventListener('click', (e) => {
-                e.preventDefault();
-                const value = document.querySelector('#view-coupons').dataset.value
-
-                fetch(`/coupon?orderValue=${value}`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.text().then(text => { throw new Error(text) })
-                        } else {
-                            return response.json()
-                        }
-                    })
-                    .then(data => {
-                        if (data.status === 'success') {
-                            this.displayingCoupons(data.data);
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            })
+            this.coupon.addEventListener('click', this.displayingCoupons.bind(this));
         },
 
-        displayingCoupons(data) {
+        displayingCoupons() {
 
-            const viewCoupons = document.querySelector('#applicable-coupons')
+            this.viewCoupons.classList.toggle('hidden');
+
+        },
+
+        addingCoupons(data) {
+
+            this.viewCoupons.innerHTML = ""
 
             data.forEach(coupon => {
 
@@ -58,33 +95,69 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex justify-between items-center">
                             <div class="flex">
                                 <img src="https://fastrr-boost-ui.pickrr.com/assets/images/svg/discount_icon.svg" alt="coupon-logo" class="pr-0.5">
-                                <span>${coupon.code}</span>
+                                ${coupon.missingAmount === 0 ?
+                        `<span>${coupon.code}</span>` :
+                        `<span class="text-gray-500">${coupon.code}</span>`
+                    }
                             </div>
-                            <button class="border border-indigo-500 px-4 py-0.5  rounded-md">Apply</button>
+                            <button type="button" class="apply-btn border ${coupon.missingAmount === 0 ? `border-indigo-500` : `border-gray-500 opacity-50`}  px-4 py-0.5  rounded-md" data-code = "${coupon.code}">Apply</button>
                         </div>
                         <div class="mt-3">
-                            <p class="text-green-800 font-semibold text-start text-sm">Apply this coupon and save 780</p>
+                            ${coupon.missingAmount === 0 ?
+                        `<p id="savings" class=" text-green-800 font-semibold text-start text-sm" data-savings = ${coupon.savings}>Apply this coupon and save ₹ ${coupon.savings}"</p>` :
+                        `<p class="text-red-800 font-semibold text-start text-sm">Add more items worth ₹ ${coupon.missingAmount} to apply this offer</p>`
+                    }  
                             <p class="text-xs text-start">${coupon.description}</p>
                         </div>
                 `
-                viewCoupons.appendChild(couponCard)
+
+                this.viewCoupons.appendChild(couponCard)
             });
 
-            viewCoupons.classList.contains('hidden') ? viewCoupons.classList.remove('hidden') : viewCoupons.classList.add('hidden')
+            this.applyBtnSetup()
 
+        },
+
+        applyBtnSetup() {
+
+            const applybtn = document.querySelectorAll('.apply-btn')
+
+            applybtn.forEach(btn => {
+
+                btn.addEventListener('click', (e) => {
+
+                    const code = e.target.dataset.code
+                    const savingAmt = btn.parentElement.nextElementSibling.querySelector('#savings').dataset.savings
+                    this.couponApplied(code, savingAmt)
+
+                })
+
+            })
+
+        },
+
+        couponApplied(code, savingAmt) {
+
+            document.querySelector('#coupon-code').innerHTML = `${code} applied! `
+            document.querySelector('#apply-btn').classList.add('hidden')
+            document.querySelector('#remove-coupon').classList.remove('hidden')
+            document.querySelector('#coupon-applied-message').textContent = "You save"
+            document.querySelector('#coupon-saving-amt').textContent = ` ₹ ${ savingAmt}`
+            this.couponContainer.classList.add('hidden')
+            this.updatingOrderAmt('#modal-total-price', savingAmt)
+            this.subCouponCode.textContent = `Coupon Discount (${code})`
+            this.subCouponDiscount.textContent = `- ₹ ${ savingAmt}`
+            this.subCouponDisplay.classList.replace('hidden', 'flex')
+        },
+
+        updatingOrderAmt(element, mutliplier = 1) {
+
+            const price = document.querySelector('#totalOrderValue').getAttribute('data-price')
+            document.querySelector(element).innerHTML = price - mutliplier
         }
-
-
-
     }
 
 
     data.init();
-
-
-
-
-
-
 
 })

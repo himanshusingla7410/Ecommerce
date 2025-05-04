@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('code');
             $table->text('description');
             $table->integer('min_amt');
-            $table->integer('max_amt');
+            $table->integer('value');
+            $table->string('type');
             $table->date('valid_from');
             $table->date('valid_to');
             $table->boolean('is_active');

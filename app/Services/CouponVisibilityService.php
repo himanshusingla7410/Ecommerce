@@ -12,7 +12,7 @@ class CouponVisibilityService
     {   
         return  Cache::remember(
             "value_{$orderValue}",
-            now()->addMinutes(1),
+            now()->addMinutes(30),
             function() use ($orderValue) {
 
                 return Coupon::query()
@@ -33,23 +33,19 @@ class CouponVisibilityService
 
     private function formatCoupon(Coupon $coupon, float $orderValue) : array {
 
-        $isCouponApplicable = $this->isApplicable($coupon, $orderValue);
         $missingAmount = $coupon->min_amt >= $orderValue ? $coupon->min_amt - $orderValue : 0 ;
+        $savings = $coupon->type === 'percentage' ? $orderValue * $coupon->value / 100 : $coupon->value;
 
         return [
             'code'=> $coupon->code,
             'description'=> $coupon->description,
-            'applicable'=> $isCouponApplicable,
             'missingAmount'=> $missingAmount,
+            'savings'=> $savings
         ];
     }
 
 
-    private function isApplicable($coupon, $orderValue) : bool{
-
-        return !$coupon->min_amt || $orderValue >= $coupon->min_amt;
-
-    }
+    
 
 
 

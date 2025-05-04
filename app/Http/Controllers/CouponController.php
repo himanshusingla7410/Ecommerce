@@ -19,7 +19,7 @@ class CouponController extends Controller
         // dd($orderValue);
 
         $data= $this->coupon->getCoupons($orderValue);
-
+        
         return response()->json([
             'status'=> 'success',
             'data' => $data

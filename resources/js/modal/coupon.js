@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async preloadCoupons() {
 
-            const value = this.coupon.dataset.value
+            const value = document.querySelector('#totalOrderValue').getAttribute('data-price')
 
             if (!value) {
                 return;

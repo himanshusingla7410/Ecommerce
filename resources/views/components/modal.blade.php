@@ -94,5 +94,8 @@
             </div>
 
         </div>
+
     </div>
+    <x-modalPartials.couponSuccess></x-modalPartials.couponSuccess>
+
 </x-modalPartials.layout>

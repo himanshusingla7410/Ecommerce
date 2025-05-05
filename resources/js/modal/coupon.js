@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 entries.forEach((e) => {
                     if (e.isIntersecting) {
                         this.preloadCoupons()
-                        this.observer.unobserve(e.target)
+                        // this.observer.unobserve(e.target)
                     }
 
                 })
@@ -142,19 +142,53 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#apply-btn').classList.add('hidden')
             document.querySelector('#remove-coupon').classList.remove('hidden')
             document.querySelector('#coupon-applied-message').textContent = "You save"
-            document.querySelector('#coupon-saving-amt').textContent = ` ₹ ${ savingAmt}`
+            document.querySelector('#coupon-saving-amt').textContent = ` ₹ ${savingAmt}`
             this.couponContainer.classList.add('hidden')
             this.updatingOrderAmt('#modal-total-price', savingAmt)
             this.subCouponCode.textContent = `Coupon Discount (${code})`
-            this.subCouponDiscount.textContent = `- ₹ ${ savingAmt}`
+            this.subCouponDiscount.textContent = `- ₹ ${savingAmt}`
             this.subCouponDisplay.classList.replace('hidden', 'flex')
+            this.displaySuccessMessage(code, savingAmt)
         },
+
+
 
         updatingOrderAmt(element, mutliplier = 1) {
 
             const price = document.querySelector('#totalOrderValue').getAttribute('data-price')
             document.querySelector(element).innerHTML = price - mutliplier
+        },
+
+
+
+        displaySuccessMessage(code, savingAmt) {
+
+            const couponSucess = document.querySelector('#coupon-success')
+            document.querySelector('#coupon-success-code').textContent = code
+            document.querySelector('#coupon-success-savings').textContent = savingAmt
+
+            couponSucess.classList.replace('hidden', 'flex')
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            })
+            
+            if (couponSucess) {
+                setTimeout(() => {
+                    couponSucess.classList.replace('flex', 'hidden')
+                }, 4000)
+            }
+
         }
+
+
+
+
+
+
+
     }
 
 

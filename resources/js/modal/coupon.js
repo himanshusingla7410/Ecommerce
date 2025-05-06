@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `<span class="text-gray-500">${coupon.code}</span>`
                     }
                             </div>
-                            <button type="button" class="apply-btn border ${coupon.missingAmount === 0 ? `border-indigo-500` : `border-gray-500 opacity-50`}  px-4 py-0.5  rounded-md" data-code = "${coupon.code}">Apply</button>
+                            <button type="button" class="apply-btn border ${coupon.missingAmount === 0 ? `border-indigo-500` : `border-gray-500 opacity-50`}  px-4 py-0.5  rounded-md cursor-pointer" data-code = "${coupon.code}">Apply</button>
                         </div>
                         <div class="mt-3">
                             ${coupon.missingAmount === 0 ?
@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+        
 
 
 

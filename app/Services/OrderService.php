@@ -16,9 +16,13 @@ class OrderService
             $items = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
                 ->where('ip_address', request()->ip())
                 ->distinct()
-                ->get();
+                ->get(); 
 
-            return $items->sum('product_price');    
+            // dd($items);
+
+            return $items->sum( function($item) {
+                return $item->product_price * $item->product_quantity;    
+            });
         }
 
         $collection = collect($products);

@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         qty += 1
         displayQty.textContent = qty;
         inputQty.value = qty ;
-        console.log(inputQty.value)
         displayQty.setAttribute('data-qty', qty)
         individualItemPrice.setAttribute('data-price', individualItemPrice.innerHTML * qty)
     })
@@ -36,10 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             qty -= 1
             displayQty.textContent = qty;
             inputQty.value = qty ;
-            console.log(inputQty.value)
             displayQty.setAttribute('data-qty', qty)
             individualItemPrice.setAttribute('data-price', individualItemPrice.textContent * qty)
-            console.log(inputQty.textContent)
         }
     })
 

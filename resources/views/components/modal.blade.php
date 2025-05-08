@@ -44,14 +44,14 @@
                     <img src="https://fastrr-boost-ui.pickrr.com/assets/images/svg/discount_icon.svg" alt="coupon-logo" class="pr-0.5">
                     <span id="coupon-code" class="text-s">XOXO10</span>
                 </div>
-                <div>
-                    <button id="apply-btn" class="text-indigo-500 font-semibold cursor-pointer">Apply</button>
-                    <button id="remove-coupon" class=" cursor-pointer hidden ">X</button>
-                </div>
+
+                <button id="default-apply-btn" class="apply-btn text-indigo-500 font-semibold cursor-pointer" data-code="XOXO10">Apply</button>
+                <button id="remove-coupon" class=" cursor-pointer hidden ">X</button>
+
             </div>
 
             <div class=" flex justify-items-start text-green-800 font-semibold text-sm mt-3">
-                <p id="coupon-applied-message"> Apply coupon and save </p><span id="coupon-saving-amt" class="ml-1"> {{$totalOrderValue *0.1}}</span>
+                <p id="coupon-applied-message"> Apply coupon and save </p><span id="savings" class="ml-1" data-savings="{{$totalOrderValue *0.1}}"> {{$totalOrderValue *0.1}}</span>
             </div>
             <div class="view-coupon-container">
                 <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>

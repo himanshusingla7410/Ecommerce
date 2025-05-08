@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.cacheDOM();
             this.listenForEvents();
             this.setObserver()
-
+            this.applyBtnSetup()
+            this.removeCoupon()
         },
 
         setObserver() {
@@ -36,7 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.subCouponCode = document.querySelector('#sub-coupon-code')
             this.subCouponDiscount = document.querySelector('#coupon-discount-amt')
             this.subCouponDisplay = document.querySelector('#coupon-discount')
-
+            this.defaultApplyBtn = document.querySelector('#default-apply-btn')
+            this.couponRemoveBtn = document.querySelector('#remove-coupon')
+            this.couponCode = document.querySelector('#coupon-code')
+            this.couponAppliedMessage = document.querySelector('#coupon-applied-message')
         },
 
         async preloadCoupons() {
@@ -74,14 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         listenForEvents() {
 
-            this.coupon.addEventListener('click', this.displayingCoupons.bind(this));
-        },
-
-        displayingCoupons() {
-
-            this.viewCoupons.classList.toggle('hidden');
+            this.coupon.addEventListener('click', (e) => { this.viewCoupons.classList.toggle('hidden') })
+            this.couponRemoveBtn.addEventListener('click', this.removeCoupon.bind(this))
 
         },
+
+
 
         addingCoupons(data) {
 
@@ -139,10 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
         couponApplied(code, savingAmt) {
 
             document.querySelector('#coupon-code').innerHTML = `${code} applied! `
-            document.querySelector('#apply-btn').classList.add('hidden')
+            document.querySelector('#default-apply-btn').classList.add('hidden')
             document.querySelector('#remove-coupon').classList.remove('hidden')
             document.querySelector('#coupon-applied-message').textContent = "You save"
-            document.querySelector('#coupon-saving-amt').textContent = ` ₹ ${savingAmt}`
+            document.querySelector('#savings').textContent = ` ₹ ${savingAmt}`
             this.couponContainer.classList.add('hidden')
             this.updatingOrderAmt('#modal-total-price', savingAmt)
             this.subCouponCode.textContent = `Coupon Discount (${code})`
@@ -153,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-        updatingOrderAmt(element, mutliplier = 1) {
+        updatingOrderAmt(element, mutliplier = 0) {
 
             const price = document.querySelector('#totalOrderValue').getAttribute('data-price')
             document.querySelector(element).innerHTML = price - mutliplier
@@ -174,18 +176,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 spread: 70,
                 origin: { y: 0.6 }
             })
-            
+
             if (couponSucess) {
                 setTimeout(() => {
                     couponSucess.classList.replace('flex', 'hidden')
-                }, 4000)
+                }, 3000)
             }
 
-        }
+        },
+
+        removeCoupon() {
+
+            this.couponRemoveBtn.classList.add('hidden')
+            this.defaultApplyBtn.classList.remove('hidden')
+            this.couponCode.textContent = 'XOXO10'
+            this.couponAppliedMessage.innerHTML = 'Apply coupon and save'
+            this.updatingOrderAmt('#modal-total-price')
+            this.subCouponDisplay.classList.replace('flex', 'hidden')
+            this.couponContainer.classList.remove('hidden')
+
+        },
 
 
 
-        
+
 
 
 

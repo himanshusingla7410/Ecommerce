@@ -1,130 +1,117 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const addCartbtn = document.querySelector('#add-to-cart-btn')
-    const removeCartbtn = document.querySelector('#remove-from-cart-btn')
-    const plusBtn = document.querySelector('#btn-plus');
-    const minusBtn = document.querySelector('#btn-minus');
-    const inputQty = document.querySelector('#input-qty');
-    const displayQty = document.querySelector('#qty-value');
-    const images = document.querySelectorAll('#thumbnail');
-    const sizeSelected = document.querySelectorAll('#size');
-    const submissionForm = document.querySelector('#product-details')
-    const deletionForm = document.querySelector('#remove-item')
-    const blackDot = document.querySelector('#cart-black-dot')
-    const individualItemPrice = document.querySelector('#totalOrderValue')
+class ProductViewHandler {
 
+    constructor() {
 
-    // Image Switching
-    images.forEach((i) => {
-        i.addEventListener('click', (e) => {
+        this.cacheDOM()
+        this.imageSwitcher()
+        this.listenForEvents()
+
+    }
+
+    cacheDOM() {
+
+        this.addCartbtn = document.querySelector('#add-to-cart-btn')
+        this.removeCartbtn = document.querySelector('#remove-from-cart-btn')
+        this.plusBtn = document.querySelector('#btn-plus');
+        this.minusBtn = document.querySelector('#btn-minus');
+        this.inputQty = document.querySelector('#input-qty');
+        this.displayQty = document.querySelector('#qty-value');
+        this.images = document.querySelectorAll('#thumbnail');
+        this.sizeSelected = document.querySelectorAll('#size');
+        this.submissionForm = document.querySelector('#product-details')
+        this.deletionForm = document.querySelector('#remove-item')
+        this.blackDot = document.querySelector('#cart-black-dot')
+        this.individualItemPrice = document.querySelector('#totalOrderValue')
+        this.qty = 1
+    }
+
+    listenForEvents() {
+
+        this.plusBtn.addEventListener('click', () => this.increaseQty())
+        this.minusBtn.addEventListener('click', () => this.decreaseQty())
+        this.submissionForm.addEventListener('submit', (e) => this.addToCart(e))
+
+    }
+
+    imageSwitcher() {
+
+        this.images.forEach((i) => i.addEventListener('click', (e) => {
             document.querySelector('#mainImage').src = i.src;
         })
-    })
+        )
+    }
 
-    // Qty Updating
-    let qty = 1
+    increaseQty() {
 
-    plusBtn.addEventListener('click', (e) => {
-        qty += 1
-        displayQty.textContent = qty;
-        inputQty.value = qty ;
-        displayQty.setAttribute('data-qty', qty)
-        individualItemPrice.setAttribute('data-price', individualItemPrice.innerHTML * qty)
-    })
-    minusBtn.addEventListener('click', (e) => {
-        if (qty > 1) {
-            qty -= 1
-            displayQty.textContent = qty;
-            inputQty.value = qty ;
-            displayQty.setAttribute('data-qty', qty)
-            individualItemPrice.setAttribute('data-price', individualItemPrice.textContent * qty)
+        this.qty += 1
+        this.displayQty.textContent = this.qty;
+        this.inputQty.value = this.qty;
+        this.displayQty.setAttribute('data-qty', this.qty)
+        this.individualItemPrice.setAttribute('data-price', this.individualItemPrice.innerHTML * this.qty)
+
+    }
+
+    decreaseQty() {
+
+        if (this.qty > 1) {
+            this.qty -= 1
+            this.displayQty.textContent = this.qty;
+            this.inputQty.value = this.qty;
+            this.displayQty.setAttribute('data-qty', this.qty)
+            this.individualItemPrice.setAttribute('data-price', this.individualItemPrice.textContent * this.qty)
         }
-    })
 
-    // Cart black dot visibility
-    function cartDotVisibility($cartCount = 0) {
+    }
 
-        if ($cartCount > 0) {
-            blackDot.classList.replace('opacity-0', 'opacity-100');
-        } else {
-            blackDot.classList.replace('opacity-100', 'opacity-0');
+    cartDotVisibility(cartCount = 0) {
+        cartCount > 0 ? this.blackDot.classList.replace('opacity-0', 'opacity-100') : this.blackDot.classList.replace('opacity-100', 'opacity-0');
+    }
+
+    async addToCart(e) {
+
+        e.preventDefault();
+        const formData = new FormData(this.submissionForm);
+        try {
+
+            const response = await fetch('/product/cart', {
+
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                },
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error( await response.text())
+            }
+
+            const data = await response.json()
+
+            if (data.status === 'success') {
+                this.cartDotVisibility(data.cartCount);
+                this.addCartbtn.classList.add('hidden')
+                this.removeCartbtn.classList.remove('hidden')
+            }
+        }
+        catch (error) {
+            console.error('Some error occured while adding.', error)
+            this.addCartbtn.classList.remove('bg-white', 'hover:bg-gray-100')
+            this.addCartbtn.classList.add('bg-red-600', 'hover:bg-red-500')
+            this.addCartbtn.innerHTML = 'Oops ! Failed to add in cart.'
         }
 
     }
 
 
-    // Request to add items in cart
-    submissionForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(submissionForm);
 
-        fetch('/product/cart', {
+    
 
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Accept': 'application/json',
-            },
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.json();
-            })
-            .then(data => {
-
-                if (data.status === 'success') {
-                    cartDotVisibility(data.cartCount);
-                    addCartbtn.classList.add('hidden')
-                    removeCartbtn.classList.remove('hidden')
-                }
-            })
-            .catch(error => {
-                console.error('Fetch error', error)
-                addCartbtn.classList.remove('bg-white', 'hover:bg-gray-100')
-                addCartbtn.classList.add('bg-red-600', 'hover:bg-red-500')
-                addCartbtn.innerHTML = 'Oops ! Failed to add in cart.'
-            })
-
-    })
+}
 
 
-    // Request to remove items from cart
-    deletionForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(deletionForm)
-        console.log(deletionForm);
-        formData.append('_method', 'DELETE')
-        fetch('/product/cart', {
-
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Accept': 'application/json'
-            },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-
-                if (data.status === 'success') {
-                    cartDotVisibility(data.cartCount);
-                    removeCartbtn.classList.add('hidden')
-                    addCartbtn.classList.remove('hidden')
-                }
-
-            })
-            .catch(error => {
-                removeCartbtn.classList.remove('bg-green-600', 'hover:bg-green-500')
-                removeCartbtn.classList.add('bg-red-600', 'hover:bg-red-500')
-                removeCartbtn.innerHTML = 'Oops ! Failed to remove from cart.'
-                console.log('Fetch error', error)
-
-            })
-
-    })
+document.addEventListener('DOMContentLoaded', () => new ProductViewHandler())
 
 
 
@@ -136,5 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-})
+
+
+
 

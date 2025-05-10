@@ -17,7 +17,7 @@
             </div>
 
             <div class="flex justify-center mt-10 mb-22">
-                <a href="/" class=" w-40 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
+                <a href="/products" class=" w-40 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
                     Continue Shopping
                 </a>
             </div>

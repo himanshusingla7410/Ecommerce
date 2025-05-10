@@ -95,9 +95,7 @@
 
 
 
-    @push('scripts')
-    <!-- @vite(['resources/js/product.js']) -->
-    @endpush
+   
 
 
 </x-layout>

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const data = {
+    const couponHandler = {
 
         init() {
 
@@ -198,15 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
-
-
-
-
-
-
     }
 
 
-    data.init();
+    couponHandler.init();
 
 })

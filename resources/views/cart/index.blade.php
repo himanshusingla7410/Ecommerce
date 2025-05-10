@@ -106,6 +106,8 @@
 
     @push('scripts')
     @vite(['resources/js/cart.js'])
+    @vite(['resources/js/modal/modal.js'])
+    @vite(['resources/js/modal/coupon.js'])
     @endpush
 
 

@@ -51,7 +51,7 @@
             </div>
 
             <div class=" flex justify-items-start text-green-800 font-semibold text-sm mt-3">
-                <p id="coupon-applied-message"> Apply coupon and save </p><span id="savings" class="ml-1" data-savings="{{$totalOrderValue *0.1}}"> {{$totalOrderValue *0.1}}</span>
+                <p id="coupon-applied-message"> Apply coupon and save </p><span id="savings" class="savings ml-1" data-savings="{{$totalOrderValue *0.1}}"> {{$totalOrderValue *0.1}}</span>
             </div>
             <div class="view-coupon-container">
                 <div style="height: 1px; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent 100%); background-size: 8px 1px; border: none; margin: 10px 0px 0px;"></div>

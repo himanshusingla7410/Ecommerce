@@ -64,7 +64,7 @@
         </div>
 
         <!-- Phone number input -->
-        <section class="space-y-1">
+        <section class="mobile-number space-y-1">
             <h2 class="font-bold text-xl mt-4">Enter phone number</h2>
             <p class="text-gray-600 text-sm">Please provide your phone number to continue</p>
             <div class="border border-gray-300 rounded-lg flex  overflow-hidden shadow-sm mt-5">
@@ -72,12 +72,17 @@
                     <img class="pr-0.5" src="https://fastrr-boost-ui.pickrr.com/assets/images/indian_flag.svg" alt="">
                     <span style="font-size: 16px; font-weight: 400;">+91</span>
                 </div>
-                <form action="" id="phone_number">
-                    <input class="w-full focus:outline-none px-3 py-3" type="text" name="phone_number" value="" placeholder="10-digit phone number" required>
+                <form action="/login" id="mobile_number">
+                    <input class="w-full focus:outline-none px-3 py-3" type="text" name="mobile_number" value="" placeholder="10-digit phone number" required>
                 </form>
             </div>
-            <button form="phone_number" id="submit" type="submit" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Submit</button>
+            <button form="mobile_number" id="submit" type="submit" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Submit</button>
         </section>
+        
+        <!-- Placing order -->
+        <div class="place-order hidden mt-25">
+            <a  href="/address" id="placeOrder"  class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Place Order</a>
+        </div>
 
         <!-- Payment merchant info -->
         <div class="flex justify-between space-x-3 text-xs mt-25 py-10">

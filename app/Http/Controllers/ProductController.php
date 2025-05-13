@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use App\Services\OrderService;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,12 @@ class ProductController extends Controller
         $products = Product::select('product_name', 'product_price', 'product_image')->limit(4)->get();
         $products1 = Product::select('product_name', 'product_price', 'product_image')->limit(4)->offset(4)->get();
 
-
+        $user = User::where([
+            'mobile_number' => '8968188510'
+        ])->first();
+        
+        Auth::login($user);
+        
         return view('welcome', compact('products', 'products1'));
         
     }

@@ -20,6 +20,7 @@ class orderDetailsModal {
         this.arrow = document.querySelector('#arrow')
         this.productName = document.querySelectorAll('.product')
         this.couponApplied = document.querySelector('#remove-coupon')
+        this.formSubmitBtn = document.querySelector('#submit')
 
     }
 
@@ -28,6 +29,7 @@ class orderDetailsModal {
         this.buyBtn.addEventListener('click', () => this.showModal())
         this.closeBtn.addEventListener('click', () => this.hideModal())
         this.orderSummary.addEventListener('click', () => this.toggleSubSummary())
+        this.formSubmitBtn.addEventListener('click', (e) => this.store(e))
     }
 
 
@@ -80,7 +82,7 @@ class orderDetailsModal {
     }
 
 
-    // Updating Qty in modal at sub summary
+    // Updating Qty in sub summary
     updatingQty() {
 
         this.productName.forEach((product) => {
@@ -95,10 +97,39 @@ class orderDetailsModal {
 
     }
 
+    async store(e) {
+
+        e.preventDefault();
+
+        const form = document.querySelector('#mobile_number');
+
+        const formData = new FormData(form)
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+
+        if (!response.ok) {
+            throw new Error(response.text())
+        }
+
+        const data = await response.json()
+
+        if (data.status == 'success') {
+            document.querySelector('.mobile-number').classList.add('hidden')
+            document.querySelector('.place-order').classList.remove('hidden')
+        }
+
+    }
 
 
 
-    
+
 
 }
 

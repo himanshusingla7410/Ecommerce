@@ -30,6 +30,9 @@
         </button>
     </div>
 
+
+
+
     <x-footer></x-footer>
     @stack('scripts')
 </body>

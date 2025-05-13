@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
         View::composer('components.nav-link', function($view){
             $view->with('cartCount', Cart::where('ip_address', request()->ip())->count());
         });
+
+
+
     }
 }

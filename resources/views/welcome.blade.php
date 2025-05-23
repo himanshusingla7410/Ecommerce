@@ -101,7 +101,6 @@
 
     <!-- Welcome discount modal -->
     <x-modals.welcomeDiscount />
-
     @push('scripts')
     @vite(['resources/js/modal/welcome.js'])
     @endpush

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -13,10 +13,10 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <x-header></x-header>
 
-    <div class="bg-white">
+    <div class="bg-white ">
         {{ $slot }}
     </div>
 

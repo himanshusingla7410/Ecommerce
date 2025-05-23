@@ -8,6 +8,14 @@ class LogInDiscountHandler {
 
     }
 
+    listenForEvents() {
+        document.querySelector('#copy-btn')?.addEventListener('click', () => this.copyCode());
+        document.querySelector('#close-btn').addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
+        document.querySelector('#no-thanks')?.addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
+        document.querySelector('.shop-now')?.addEventListener('click', () => localStorage.setItem('discountClaimed', true))
+
+    }
+
     show() {
 
         if (!localStorage.getItem('discountClaimed')) {
@@ -17,13 +25,40 @@ class LogInDiscountHandler {
         }
     }
 
-    listenForEvents(){
-        document.querySelector('#close-btn').addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
-        document.querySelector('#no-thanks').addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
-        document.querySelector('#submit').addEventListener('click', (e) => this.store(e))
-    }
-    
 
+    async copyCode() {
+
+        const couponCode = document.getElementById('coupon-code').value;
+        const btn = document.querySelector('#copy-btn');
+        const tooltip = btn.querySelector('span');
+        const icon = btn.querySelector('svg');
+
+        try {
+            await navigator.clipboard.writeText(couponCode);
+
+            tooltip.textContent = 'Copied!';
+            tooltip.classList.add('bg-green-500');
+            icon.classList.add('text-green-500');
+
+            setTimeout(() => {
+                tooltip.textContent = 'Copy';
+                tooltip.classList.remove('bg-green-500');
+                icon.classList.remove('text-green-500');
+            }, 5000);
+
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+            tooltip.textContent = 'Failed!';
+            tooltip.classList.add('bg-red-500');
+            setTimeout(() => {
+                tooltip.textContent = 'Copy';
+                tooltip.classList.remove('bg-red-500');
+            }, 2000);
+        }
+
+    }
+
+    // document.querySelector('#submit').addEventListener('click', (e) => this.store(e))
     async store(e) {
 
         e.preventDefault();

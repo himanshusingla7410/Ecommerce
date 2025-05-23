@@ -5,7 +5,7 @@ class orderDetailsModal {
     constructor() {
 
         this.cacheDom(),
-            this.listenForEvents()
+        this.listenForEvents()
 
     }
 
@@ -29,7 +29,7 @@ class orderDetailsModal {
         this.buyBtn.addEventListener('click', () => this.showModal())
         this.closeBtn.addEventListener('click', () => this.hideModal())
         this.orderSummary.addEventListener('click', () => this.toggleSubSummary())
-        this.formSubmitBtn.addEventListener('click', (e) => this.store(e))
+        // this.formSubmitBtn.addEventListener('click', (e) => this.store(e))
     }
 
 
@@ -104,26 +104,29 @@ class orderDetailsModal {
         const form = document.querySelector('#mobile_number');
 
         const formData = new FormData(form)
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
 
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Accept': 'application/json'
-            },
-            body: formData
-        })
+            if (!response.ok) {
+                throw new Error(response.text())
+            }
 
-        if (!response.ok) {
-            throw new Error(response.text())
+            const data = await response.json()
+
+            if (data.status == 'success') {
+                console.log('registered successfully !')
+            }
+        } catch (error) {
+            console.log(error);
         }
 
-        const data = await response.json()
-
-        if (data.status == 'success') {
-            document.querySelector('.mobile-number').classList.add('hidden')
-            document.querySelector('.place-order').classList.remove('hidden')
-        }
 
     }
 

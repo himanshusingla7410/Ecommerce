@@ -14,14 +14,9 @@ class ProductController extends Controller
     {
         $products = Product::select('product_name', 'product_price', 'product_image')->limit(4)->get();
         $products1 = Product::select('product_name', 'product_price', 'product_image')->limit(4)->offset(4)->get();
-
-        $user = User::where([
-            'mobile_number' => '8968188510'
-        ])->first();
+        $discountClaimed = false;
         
-        Auth::login($user);
-        
-        return view('welcome', compact('products', 'products1'));
+        return view('welcome', compact('products', 'products1','discountClaimed'));
         
     }
 
@@ -33,8 +28,10 @@ class ProductController extends Controller
             ->paginate(8);
         $count = Product::all()->count();
 
-
-
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
         return view('product.index', compact('products', 'count'));
     }
 

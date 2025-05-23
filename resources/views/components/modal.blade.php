@@ -1,4 +1,4 @@
-<x-modalPartials.layout>
+<x-modals.partials.layout>
     <div class="pt-8 px-8">
 
         <!-- Order Summary -->
@@ -64,6 +64,7 @@
         </div>
 
         <!-- Phone number input -->
+        @guest
         <section class="mobile-number space-y-1">
             <h2 class="font-bold text-xl mt-4">Enter phone number</h2>
             <p class="text-gray-600 text-sm">Please provide your phone number to continue</p>
@@ -72,18 +73,21 @@
                     <img class="pr-0.5" src="https://fastrr-boost-ui.pickrr.com/assets/images/indian_flag.svg" alt="">
                     <span style="font-size: 16px; font-weight: 400;">+91</span>
                 </div>
-                <form action="/login" id="mobile_number">
+                <form action="/login" id="mobile_number" method="POST"> 
+                    @csrf
                     <input class="w-full focus:outline-none px-3 py-3" type="text" name="mobile_number" value="" placeholder="10-digit phone number" required>
                 </form>
             </div>
-            <button form="mobile_number" id="submit" type="submit" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Submit</button>
+            <button form="mobile_number" id="submit" type="submit" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1 cursor-pointer">Submit</button>
         </section>
+        @endguest
         
+        @auth
         <!-- Placing order -->
-        <div class="place-order hidden mt-25">
+        <div class="place-order  mt-25">
             <a  href="/address" id="placeOrder"  class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Place Order</a>
         </div>
-
+        @endauth
         <!-- Payment merchant info -->
         <div class="flex justify-between space-x-3 text-xs mt-25 py-10">
             <div class="flex items-center space-x-1">
@@ -101,6 +105,6 @@
         </div>
 
     </div>
-    <x-modalPartials.couponSuccess></x-modalPartials.couponSuccess>
+    <x-modals.couponSuccess></x-modals.couponSuccess>
 
-</x-modalPartials.layout>
+</x-modals.partials.layout>

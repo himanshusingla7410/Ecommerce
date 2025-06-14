@@ -1,5 +1,7 @@
 <x-layout>
-
+    @if(session('loginStatus'))
+    <x-partials.successAlert>Login successful. Click Buy now button to proceed.</x-partials.successAlert>
+    @endif
     <section class="relative pt-30 px-10">
         <div class="py-10 px-35">
             <div class="flex justify-center">

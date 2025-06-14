@@ -25,6 +25,7 @@ Route::get('/coupon', [CouponController::class, 'index']);
 
 Route::post('/placeorder', [ShippingController::class, 'index']);
 Route::post('/address', [ShippingController::class, 'store']);
+Route::patch('/address', [ShippingController::class, 'check']);
 Route::get('/address/{id}', [ShippingController::class, 'edit']);
 
 Route::get('/login', [RegisterationController::class, 'index'])->name('login');

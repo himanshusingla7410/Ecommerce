@@ -112,11 +112,14 @@
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button id="cancel-btn" type="button" class="text-sm/6 font-semibold text-gray-900 cursor-pointer">Cancel</button>
                 <button id="submit-btn" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">Save & Proceed</button>
-                <button id="update-btn" type="button" class=" rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">Update & Proceed</button>
+                <form action="/address" method="POST" id="udpate">
+                    @csrf
+                    @method('PATCH')
+                    <button form="update" id="update-btn" type="submit" class=" rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">Update & Proceed</button>   
+                </form>
             </div>
 
         </form>
     </div>
 
 </div>
-

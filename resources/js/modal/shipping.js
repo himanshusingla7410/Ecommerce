@@ -3,7 +3,7 @@ class ShippingHandler {
     constructor() {
         this.cacheDOM()
         this.listenForEvents()
-        this.setObserver()
+        // this.setObserver()
     }
 
     cacheDOM() {
@@ -24,15 +24,19 @@ class ShippingHandler {
             this.show()
         })
         this.cancelBtn.addEventListener('click', () => this.hide())
-        this.editBtn.forEach(btn => btn.addEventListener('click', () => this.showFormToEdit()))
+        this.editBtn.forEach(btn => btn.addEventListener('click', (e) => this.showFormToEdit(e)))
     }
 
+    //redundant
     setObserver() {
 
         this.observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
 
-                if(entry.isIntersecting )  this.preloadData() 
+                if (entry.isIntersecting) {
+                    this.preloadData(entry.target.getAttribute('data-id'))
+                    this.observer.unobserve(entry.target)
+                }
             })
         }, { threshold: 0.50 })
 
@@ -43,17 +47,17 @@ class ShippingHandler {
         this.resetForm()
         this.main.classList.replace('hidden', 'flex');
         this.body.classList.add('overflow-hidden')
-        this.updateBtn.classList.add('hidden')  
+        this.updateBtn.classList.add('hidden')
         this.submitBtn.classList.remove('hidden')
     }
 
     resetForm() {
 
-        const fields = ['#first_name', '#last_name','#email','#mobile_number', '#address','#city','#state', '#postal_code']
+        const fields = ['#first_name', '#last_name', '#email', '#mobile_number', '#address', '#city', '#state', '#postal_code']
 
-        fields.forEach((field) =>{
+        fields.forEach((field) => {
             document.querySelector(field).value = ""
-        } )
+        })
 
 
     }
@@ -64,16 +68,8 @@ class ShippingHandler {
 
     }
 
-    preloadData() {
 
-        this.editBtn.forEach((btn) => {
-            const id = btn.getAttribute('data-id');
-            this.getData(id)
-        })
-
-    }
-
-    async getData(id) {
+    async preloadData(id) {
 
         try {
             const response = await fetch(`/address/${id}`, {
@@ -118,11 +114,15 @@ class ShippingHandler {
 
     }
 
-    showFormToEdit() {
+    showFormToEdit(e) {
+
+        this.resetForm()
+        this.preloadData(e.target.getAttribute('data-id'))
         this.main.classList.replace('hidden', 'flex');
         this.body.classList.add('overflow-hidden')
         this.updateBtn.classList.remove('hidden')
         this.submitBtn.classList.add('hidden')
+
 
     }
 

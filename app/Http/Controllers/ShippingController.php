@@ -23,7 +23,7 @@ class ShippingController extends Controller
         $addresses = $this->getShippingDetails(Address::where('user_id', Auth::id())->get());
         $totalAmt = $orderAmt - $savings;
         request()->session()->put([
-            'orderAmt'=> $orderAmt,
+            'orderAmt' => $orderAmt,
             'couponUsed' => $couponUsed,
             'savings' => $savings,
             'totalAmt' => $orderAmt - $savings
@@ -62,13 +62,13 @@ class ShippingController extends Controller
         ]);
 
         $addresses = $this->getShippingDetails(Address::where('user_id', Auth::id())->get());
-        $orderAmt= request()->session()->get('orderAmt');
-        $couponUsed= request()->session()->get('couponUsed');
-        $savings= request()->session()->get('savings');
-        $totalAmt= request()->session()->get('totalAmt');
+        $orderAmt = request()->session()->get('orderAmt');
+        $couponUsed = request()->session()->get('couponUsed');
+        $savings = request()->session()->get('savings');
+        $totalAmt = request()->session()->get('totalAmt');
 
 
-        return view('shipping.index', compact('addresses','orderAmt','couponUsed','savings','totalAmt'));
+        return view('shipping.index', compact('addresses', 'orderAmt', 'couponUsed', 'savings', 'totalAmt'));
     }
 
     public function edit($id)
@@ -95,15 +95,23 @@ class ShippingController extends Controller
                 "id" => $details->id,
                 "name" => implode(' ', array_filter([$details->first_name, $details->last_name])),
                 "addressDetails" => $details->address,
+                "email" => $details->email,
                 "city" => $details->city,
                 "state" => $details->state,
                 "postal_code" => $details->postal_code,
                 "mobile_number" => $details->mobile_number
             ];
-            // implode(' ', array_filter([$details->address, $details->city, $details->state, $details->postal_code]))
+
             array_push($addresses, $address);
         }
 
         return $addresses;
+    }
+
+    public function check() 
+    {
+
+        dd('test');
+
     }
 }

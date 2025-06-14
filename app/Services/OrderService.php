@@ -33,7 +33,7 @@ class OrderService
 
 
 
-    public function createOrder(int $amt = 0, string $couponCode = "", string $address = "")
+    public function createOrder( int $amt = 0,  $couponCode = "", string $address = "")
     {
 
         Order::create([

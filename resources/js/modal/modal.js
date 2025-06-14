@@ -1,4 +1,4 @@
-
+import {feedback} from '../helper.js'
 
 class orderDetailsModal {
 
@@ -23,7 +23,7 @@ class orderDetailsModal {
         this.formSubmitBtn = document.querySelector('#submit')
         this.placeOrdeBtn = document.querySelector('.place-order')
         this.finalOrderAmt = document.querySelector('#final-order-amt')
-
+        this.success = document.querySelector('.success')
     }
 
     listenForEvents() {
@@ -127,6 +127,7 @@ class orderDetailsModal {
 
             if (data.status == 'success') {
                 console.log('registered successfully !')
+                feedback(this.success)
             }
         } catch (error) {
             console.log(error);

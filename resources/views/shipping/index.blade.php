@@ -3,6 +3,8 @@
     <x-partials.failAlert> Address adding unsuccessfull.</x-partials.failAlert>
     @endif
     <x-partials.attentionAlert>Please select an address.</x-partials.attentionAlert>
+    <x-partials.failAlert>Request initiation failed.</x-partials.failAlert>
+
     <div class="mt-50 px-25">
         <div class="flex mb-5 ">
             <a href="/cart" class="text-gray-600 hover:text-gray-400">Cart</a>
@@ -34,7 +36,8 @@
                     <div class="flex justify-between">
                         <div class="flex">
                             <input id="{{ $address['id'] }}" name="select_address" type="radio" value="{{ $address['addressDetails'] }}">
-                            <p class=" ml-1 ">{{ $address['name'] }},</p>
+                            <p class=" ml-1 ">{{ $address['name'] }}</p>
+                            <p class=" ml-1 hidden">{{ $address['email'] }}</p>
                             <p class=" ml-1">{{ $address['addressDetails'] }}</p>
                             <p class=" ml-1">{{ $address['city'] }}</p>
                             <p class=" ml-1">{{ $address['state'] }}</p>
@@ -43,7 +46,7 @@
                         <button type="button" class="edit-btn text-indigo-500 hover:underline cursor-pointer " data-id="{{ $address['id'] }}">Edit</button>
                     </div>
                     <div>
-                        <p class="mt-2 ml-4 font-semibold text-xs">Mobile number: <span>{{ $address['mobile_number']}}</span></p>
+                        <p class="mt-2 ml-4 font-semibold text-xs">Mobile number: <span id="mobile-number">{{ $address['mobile_number']}}</span></p>
                     </div>
                 </div>
                 @endforeach

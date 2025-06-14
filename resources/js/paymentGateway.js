@@ -1,3 +1,5 @@
+import {feedback} from './helper.js'
+
 class paymentHandler {
 
     constructor() {
@@ -11,6 +13,7 @@ class paymentHandler {
         this.couponCode = document.querySelector('#couponCode')?.textContent
         this.addresses = document.querySelectorAll('input[name="select_address"]')
         this.attention = document.querySelector('.attention')
+        this.fail = document.querySelector('.fail')
     }
 
 
@@ -23,6 +26,9 @@ class paymentHandler {
         this.addresses.forEach((address) => {
             address.addEventListener('change', (e) => {
                 this.address = e.target.value;
+                this.mobileNumber = e.target.parentElement.parentElement.nextElementSibling.querySelector('#mobile-number').textContent
+                this.email = e.target.nextElementSibling.nextElementSibling.textContent
+                this.name = e.target.nextElementSibling.textContent
             })
         })
     }
@@ -31,8 +37,7 @@ class paymentHandler {
         e.preventDefault();
 
         if (!this.address) {
-            this.attention.classList.remove('hidden')
-            setTimeout(() => this.attention.classList.add('hidden'), 3000)
+            feedback(this.attention)
 
         } else {
 
@@ -53,7 +58,7 @@ class paymentHandler {
                         "receipt": "receipt1",
                         "notes": {
                             "couponCode": this.couponCode ?? "",
-                            "address": this.address,
+                            "address": this.address
                         }
                     })
                 })
@@ -77,9 +82,9 @@ class paymentHandler {
                         "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                         "callback_url": `/api/verifyPayment?orderNumber=${data.orderNumber}`,
                         "prefill": {
-                            "name": "Gaurav Kumar",
-                            "email": "gaurav.kumar@example.com",
-                            "contact": "9000090000"
+                            "name": this.name,
+                            "email": this.email,
+                            "contact": this.mobileNumber
                         },
                         "notes": {
                             "address": "Razorpay Corporate Office"
@@ -106,6 +111,8 @@ class paymentHandler {
             }
             catch (error) {
                 console.log('Error while sending request for order creation.')
+                this.ProceedbtnUpdate('bg-gray-800', 'bg-black', 'Proceed to pay')
+                feedback(this.fail)
             }
         }
     }
@@ -115,7 +122,6 @@ class paymentHandler {
         this.proceedBtn.classList.replace($toReplace, $withReplace)
         this.proceedBtn.textContent = $text
     }
-
 
 
 

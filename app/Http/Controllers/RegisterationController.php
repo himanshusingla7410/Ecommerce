@@ -27,7 +27,7 @@ class RegisterationController extends Controller
         ]);
         
         Auth::login($user);
-
+        request()->session()->flash('loginStatus', 'success');
         return back()->with([
             'couponCode' => 'WELCOME 200'
         ]);

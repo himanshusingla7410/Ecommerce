@@ -73,7 +73,7 @@
                     <img class="pr-0.5" src="https://fastrr-boost-ui.pickrr.com/assets/images/indian_flag.svg" alt="">
                     <span style="font-size: 16px; font-weight: 400;">+91</span>
                 </div>
-                <form action="/login" id="mobile_number" method="POST"> 
+                <form action="/login" id="mobile_number" method="POST">
                     @csrf
                     <input class="w-full focus:outline-none px-3 py-3" type="text" name="mobile_number" value="" placeholder="10-digit phone number" required>
                 </form>
@@ -81,11 +81,20 @@
             <button form="mobile_number" id="submit" type="submit" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1 cursor-pointer">Submit</button>
         </section>
         @endguest
-        
+
         @auth
         <!-- Placing order -->
         <div class="place-order  mt-25">
-            <a  href="/address" id="placeOrder"  class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Place Order</a>
+
+            <form action="/placeorder" method="POST" id="place-order">
+                @csrf
+
+                <input type="hidden" name="final-order-amt" id="final-order-amt" value="{{ $totalOrderValue }}">
+                <input type="hidden" name="final-coupon-used" id="final-coupon-used" value="">
+                <input type="hidden" name="final-savings" id="final-savings" value="">
+
+                <button type="submit" form="place-order" class="px-44 py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1">Place Order</button>
+            </form>
         </div>
         @endauth
         <!-- Payment merchant info -->

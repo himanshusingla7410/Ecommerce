@@ -12,7 +12,8 @@ class CartController extends Controller
 {
 
     public function index(OrderService $orderservice)
-    {
+    {   
+        
         $products = Cart::select('product_name', 'product_size', 'product_quantity', 'product_price', 'product_image')
             ->where('ip_address', request()->ip())
             ->get();
@@ -47,8 +48,7 @@ class CartController extends Controller
 
         if ($item) {
             $increaseQty = min($item->product_quantity + request('product_quantity'), 10);
-            $item->update(['product_quantity'=> $increaseQty]);
-
+            $item->update(['product_quantity' => $increaseQty]);
         } else {
 
             Cart::create([
@@ -62,7 +62,7 @@ class CartController extends Controller
             ]);
         }
 
-        
+
         $cartCount = Cart::where('ip_address', request()->ip())->count('product_id');
 
         return response()->json([
@@ -104,4 +104,8 @@ class CartController extends Controller
             ]);
         }
     }
+
+
+
+    
 }

@@ -35,6 +35,8 @@ class couponHandler {
         this.couponRemoveBtn = document.querySelector('#remove-coupon')
         this.couponCode = document.querySelector('#coupon-code')
         this.couponAppliedMessage = document.querySelector('#coupon-applied-message')
+        this.couponUsedForPlaceOrder = document.querySelector('#final-coupon-used')
+        this.savingsForPlaceOrder = document.querySelector('#final-savings')
     }
 
     async preloadCoupons() {
@@ -143,6 +145,8 @@ class couponHandler {
         this.subCouponDiscount.textContent = `- ₹ ${savingAmt}`
         this.subCouponDisplay.classList.replace('hidden', 'flex')
         this.displaySuccessMessage(code, savingAmt)
+        this.couponUsedForPlaceOrder.value = code
+        this.savingsForPlaceOrder.value = savingAmt
     }
 
 

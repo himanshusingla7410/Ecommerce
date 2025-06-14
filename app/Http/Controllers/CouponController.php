@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coupon;
 use App\Services\CouponVisibilityService;
 use Illuminate\Http\Request;
 

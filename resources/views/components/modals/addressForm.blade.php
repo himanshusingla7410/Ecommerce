@@ -4,7 +4,7 @@
 
         <button class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
 
-        <form action="/address" method="POST">
+        <form action="/address" method="POST" id="addressForm">
             @csrf
 
             <div class="space-y-12">
@@ -112,8 +112,11 @@
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button id="cancel-btn" type="button" class="text-sm/6 font-semibold text-gray-900 cursor-pointer">Cancel</button>
                 <button id="submit-btn" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">Save & Proceed</button>
+                <button id="update-btn" type="button" class=" rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">Update & Proceed</button>
             </div>
-        </form>
 
+        </form>
     </div>
+
 </div>
+

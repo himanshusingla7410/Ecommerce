@@ -4,7 +4,7 @@ class orderDetailsModal {
 
     constructor() {
 
-        this.cacheDom(),
+        this.cacheDom()
         this.listenForEvents()
 
     }
@@ -21,6 +21,8 @@ class orderDetailsModal {
         this.productName = document.querySelectorAll('.product')
         this.couponApplied = document.querySelector('#remove-coupon')
         this.formSubmitBtn = document.querySelector('#submit')
+        this.placeOrdeBtn = document.querySelector('.place-order')
+        this.finalOrderAmt = document.querySelector('#final-order-amt')
 
     }
 
@@ -29,12 +31,12 @@ class orderDetailsModal {
         this.buyBtn.addEventListener('click', () => this.showModal())
         this.closeBtn.addEventListener('click', () => this.hideModal())
         this.orderSummary.addEventListener('click', () => this.toggleSubSummary())
+        this.placeOrdeBtn.addEventListener('click', () => this.placingOrder())
         // this.formSubmitBtn.addEventListener('click', (e) => this.store(e))
     }
 
 
     showModal() {
-
         this.modal.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
         this.updateAmtInModal()
@@ -79,6 +81,9 @@ class orderDetailsModal {
 
         const price = parseFloat(document.querySelector('#totalOrderValue').getAttribute('data-price'))
         document.querySelector(element).innerHTML = price * mutliplier
+
+        this.finalOrderAmt.value = price
+
     }
 
 
@@ -130,6 +135,7 @@ class orderDetailsModal {
 
     }
 
+    
 
 
 

@@ -3,6 +3,7 @@ class ShippingHandler {
     constructor() {
         this.cacheDOM()
         this.listenForEvents()
+        this.setObserver()
     }
 
     cacheDOM() {
@@ -11,18 +12,50 @@ class ShippingHandler {
         this.addAddressBtn = document.querySelector('#add-address-btn')
         this.body = document.querySelector('body')
         this.cancelBtn = document.querySelector('#cancel-btn')
-        this.editBtn = document.querySelectorAll('#edit-btn')
+        this.editBtn = document.querySelectorAll('.edit-btn')
+        this.form = document.querySelector('#addressForm')
+        this.updateBtn = document.querySelector('#update-btn')
+        this.submitBtn = document.querySelector('#submit-btn')
     }
 
     listenForEvents() {
-        this.addAddressBtn.addEventListener('click', () => this.show())
+        this.isAddingMode = false
+        this.addAddressBtn.addEventListener('click', () => {
+            this.show()
+        })
         this.cancelBtn.addEventListener('click', () => this.hide())
-        this.editBtn.forEach(btn => btn.addEventListener('click', (e) => this.fetchData(btn, e)))
+        this.editBtn.forEach(btn => btn.addEventListener('click', () => this.showFormToEdit()))
+    }
+
+    setObserver() {
+
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+
+                if(entry.isIntersecting )  this.preloadData() 
+            })
+        }, { threshold: 0.50 })
+
+        this.editBtn.forEach(btn => this.observer.observe(btn))
     }
 
     show() {
+        this.resetForm()
         this.main.classList.replace('hidden', 'flex');
         this.body.classList.add('overflow-hidden')
+        this.updateBtn.classList.add('hidden')  
+        this.submitBtn.classList.remove('hidden')
+    }
+
+    resetForm() {
+
+        const fields = ['#first_name', '#last_name','#email','#mobile_number', '#address','#city','#state', '#postal_code']
+
+        fields.forEach((field) =>{
+            document.querySelector(field).value = ""
+        } )
+
+
     }
 
     hide() {
@@ -31,9 +64,16 @@ class ShippingHandler {
 
     }
 
-    async fetchData(btn, e) {
-        e.preventDefault()
-        const id = btn.getAttribute('data-id')
+    preloadData() {
+
+        this.editBtn.forEach((btn) => {
+            const id = btn.getAttribute('data-id');
+            this.getData(id)
+        })
+
+    }
+
+    async getData(id) {
 
         try {
             const response = await fetch(`/address/${id}`, {
@@ -53,29 +93,38 @@ class ShippingHandler {
             if (data.status === "success") {
                 this.edit(data.data);
             }
-        } 
-        catch(error){
-            console.error('Failed to fetch data.', error);
         }
-        
+        catch (error) {
+            console.error(`Failed to fetch data for ${id}`, error);
+        }
     }
 
     edit(data) {
 
-        this.main.classList.replace('hidden', 'flex');
-        this.body.classList.add('overflow-hidden')
+        const fields = {
+            '#first_name': data.first_name,
+            '#last_name': data.last_name,
+            '#email': data.email,
+            '#mobile_number': data.mobile_number,
+            '#address': data.address,
+            '#city': data.city,
+            '#state': data.state,
+            '#postal_code': data.postal_code,
+        }
 
-        document.querySelector('#first_name').value = data.first_name
-        document.querySelector('#last_name').value = data.last_name
-        document.querySelector('#email').value = data.email
-        document.querySelector('#mobile_number').value = data.mobile_number
-        document.querySelector('#address').value = data.address
-        document.querySelector('#city').value = data.city
-        document.querySelector('#state').value = data.state
-        document.querySelector('#postal_code').value = data.postal_code
+        Object.entries(fields).forEach(([key, value]) => {
+            document.querySelector(key).value = value
+        })
 
     }
 
+    showFormToEdit() {
+        this.main.classList.replace('hidden', 'flex');
+        this.body.classList.add('overflow-hidden')
+        this.updateBtn.classList.remove('hidden')
+        this.submitBtn.classList.add('hidden')
+
+    }
 
 
 

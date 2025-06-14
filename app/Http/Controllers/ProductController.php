@@ -28,10 +28,10 @@ class ProductController extends Controller
             ->paginate(8);
         $count = Product::all()->count();
 
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect('/');
+        // Auth::logout();
+        // request()->session()->invalidate();
+        // request()->session()->regenerateToken();
+        // return redirect('/');
         return view('product.index', compact('products', 'count'));
     }
 

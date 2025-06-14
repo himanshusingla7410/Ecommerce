@@ -12,15 +12,25 @@ class ShippingController extends Controller
 
     public function index()
     {
-        $data = Address::where('user_id', Auth::id())->get();
 
         if (! Auth::id()) {
             throw new NotFoundHttp();
         }
 
-        $addresses = $this->getShippingDetails($data);
+        $orderAmt = request('final-order-amt');
+        $couponUsed = request('final-coupon-used');
+        $savings = request('final-savings');
+        $addresses = $this->getShippingDetails(Address::where('user_id', Auth::id())->get());
+        $totalAmt = $orderAmt - $savings;
+        request()->session()->put([
+            'orderAmt'=> $orderAmt,
+            'couponUsed' => $couponUsed,
+            'savings' => $savings,
+            'totalAmt' => $orderAmt - $savings
+        ]);
 
-        return  view('shipping.index', compact('addresses'));
+
+        return  view('shipping.index', compact('addresses', 'orderAmt', 'couponUsed', 'savings', 'totalAmt'));
     }
 
     public function store()
@@ -39,7 +49,7 @@ class ShippingController extends Controller
         ]);
 
         Address::create([
-            'user_id' => User::where('mobile_number', request('mobile_number'))->first()->id,
+            'user_id' => User::where('id', Auth::id())->first()->id,
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
@@ -51,16 +61,20 @@ class ShippingController extends Controller
             'postal_code' => request('postal_code'),
         ]);
 
-        $data = Address::where('mobile_number', request('mobile_number'))->get();
-        $addresses = $this->getShippingDetails($data);
+        $addresses = $this->getShippingDetails(Address::where('user_id', Auth::id())->get());
+        $orderAmt= request()->session()->get('orderAmt');
+        $couponUsed= request()->session()->get('couponUsed');
+        $savings= request()->session()->get('savings');
+        $totalAmt= request()->session()->get('totalAmt');
 
-        return view('shipping.index', compact('addresses'));
+
+        return view('shipping.index', compact('addresses','orderAmt','couponUsed','savings','totalAmt'));
     }
 
     public function edit($id)
     {
 
-        $data = Address::find($id);
+        $data = Address::findOrFail($id);
 
         return response()->json([
             'status' => 'success',
@@ -79,10 +93,14 @@ class ShippingController extends Controller
 
             $address = [
                 "id" => $details->id,
-                "addressDetails" => implode(' ', array_filter([$details->first_name, $details->last_name, $details->address, $details->city, $details->state, $details->postal_code])),
+                "name" => implode(' ', array_filter([$details->first_name, $details->last_name])),
+                "addressDetails" => $details->address,
+                "city" => $details->city,
+                "state" => $details->state,
+                "postal_code" => $details->postal_code,
                 "mobile_number" => $details->mobile_number
             ];
-
+            // implode(' ', array_filter([$details->address, $details->city, $details->state, $details->postal_code]))
             array_push($addresses, $address);
         }
 

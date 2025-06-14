@@ -1,10 +1,8 @@
 <x-layout>
     @if($errors->any())
-    <div class="fixed top-40 right-10 border border-red-800 bg-red-100 text-red-800 p-4 w-80 rounded-md z-50 shadow-lg  ">
-        <strong>Failed !</strong>
-        <p>Address adding unsuccessfully.</p>
-    </div>
+    <x-partials.failAlert> Address adding unsuccessfull.</x-partials.failAlert>
     @endif
+    <x-partials.attentionAlert>Please select an address.</x-partials.attentionAlert>
     <div class="mt-50 px-25">
         <div class="flex mb-5 ">
             <a href="/cart" class="text-gray-600 hover:text-gray-400">Cart</a>
@@ -35,10 +33,14 @@
                 <div class=" border-b border-gray-200 p-5">
                     <div class="flex justify-between">
                         <div class="flex">
-                            <input id="select_address" name="select_address" type="radio" value="">
-                            <p class="ml-1">{{ $address['addressDetails'] }}</p>
+                            <input id="{{ $address['id'] }}" name="select_address" type="radio" value="{{ $address['addressDetails'] }}">
+                            <p class=" ml-1 ">{{ $address['name'] }},</p>
+                            <p class=" ml-1">{{ $address['addressDetails'] }}</p>
+                            <p class=" ml-1">{{ $address['city'] }}</p>
+                            <p class=" ml-1">{{ $address['state'] }}</p>
+                            <p class=" ml-1">{{ $address['postal_code'] }}</p>
                         </div>
-                        <button id="edit-btn"  class="text-indigo-500 hover:underline " data-id = "{{ $address['id'] }}">Edit</button>
+                        <button type="button" class="edit-btn text-indigo-500 hover:underline cursor-pointer " data-id="{{ $address['id'] }}">Edit</button>
                     </div>
                     <div>
                         <p class="mt-2 ml-4 font-semibold text-xs">Mobile number: <span>{{ $address['mobile_number']}}</span></p>
@@ -63,18 +65,20 @@
                 <div class="border-b border-gray-200  py-3 text-sm">
                     <div class="text-s flex justify-between space-y-2 ">
                         <span class="text-gray-400 ">MRP (Incl. Tax)</span>
-                        <p class="font-semibold">₹<span class="font-semibold">1350</span></p>
+                        <p class="font-semibold">₹ <span class="font-semibold">{{$orderAmt ?? 0}} </span></p>
                     </div>
+                    @if(isset($couponUsed))
                     <div class="text-s flex justify-between">
-                        <span class="text-gray-400">Discount (FLAT 60)</span>
-                        <p class="font-semibold">₹<span class="font-semibold">-810</span></p>
+                        <span class="text-gray-400">Discount ( <span id="couponCode">{{$couponUsed ?? 0}} </span> )</span>
+                        <p class="font-semibold">- ₹ <span class="font-semibold">{{$savings ?? 0}}</span></p>
                     </div>
+                    @endif
                 </div>
 
                 <!-- Total amount -->
                 <div class="flex justify-between py-3">
                     <span class="font-semibold">Total Amount</span>
-                    <p class="font-semibold">₹<span class="font-semibold">540</span></p>
+                    <p class="font-semibold">₹ <span id="totalAmt" class="font-semibold">{{$totalAmt ?? 0}}</span></p>
                 </div>
 
                 <!-- Global recognition and made with love -->
@@ -100,7 +104,7 @@
 
                 <!-- Proceed button -->
                 <div class="py-6 flex justify-center">
-                    <button id="submit" type="submit" class="px-30  py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1 cursor-pointer">Proceed to pay</button>
+                    <button id="rzp-button1" type="button" class="px-30  py-2 bg-black text-white text-lg font-semibold rounded-md shadow-md hover:bg-gray-800 transition mt-1 cursor-pointer">Proceed to pay</button>
                 </div>
 
                 <!-- Bottom icons -->
@@ -141,14 +145,16 @@
                 </div>
             </div>
 
-
         </div>
     </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-    <x-modals.addressForm  />
+
+    <x-modals.addressForm />
 
     @push('scripts')
     @vite(['resources/js/modal/shipping.js'])
+    @vite(['resources/js/paymentGateway.js'])
     @endpush
 
 

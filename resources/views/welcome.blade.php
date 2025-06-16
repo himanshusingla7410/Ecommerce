@@ -24,6 +24,7 @@
                         data-pic="{{$product->product_image[1] ?? $product->product_image[0]}}"
                         alt="Landing page image."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
+
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-900 font-bold">

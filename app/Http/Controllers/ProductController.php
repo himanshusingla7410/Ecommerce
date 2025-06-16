@@ -25,13 +25,14 @@ class ProductController extends Controller
 
         $products = Product::select('product_name', 'product_price', 'product_image')
             ->inRandomOrder()
-            ->paginate(8);
+            // ->paginate(8);
+            ->get();
         $count = Product::all()->count();
-
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect('/');
+        // dd($products);
+        // Auth::logout();
+        // request()->session()->invalidate();
+        // request()->session()->regenerateToken();
+        // return redirect('/');
         return view('product.index', compact('products', 'count'));
     }
 
@@ -42,6 +43,20 @@ class ProductController extends Controller
         $totalOrderValue = $orderservice->calculateOrderValue($products);
 
         return view('product.show', compact('products','totalOrderValue'));
+    }
+
+    public function preload()
+    {
+        $data = Product::select('product_name', 'product_price', 'product_image')
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+
+        return response()->json([
+            'status'=> 'success',
+            'data'=> $data
+        ]);
+
     }
    
 }

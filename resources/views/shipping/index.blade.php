@@ -1,6 +1,6 @@
 <x-layout>
     @if($errors->any())
-    <x-partials.failAlert> Address adding unsuccessfull.</x-partials.failAlert>
+    <x-partials.failAlert> Oops! Something went wrong. Try again.</x-partials.failAlert>
     @endif
     <x-partials.attentionAlert>Please select an address.</x-partials.attentionAlert>
     <x-partials.failAlert>Request initiation failed.</x-partials.failAlert>
@@ -8,8 +8,8 @@
     <div class="mt-50 px-25">
         <div class="flex mb-5 ">
             <a href="/cart" class="text-gray-600 hover:text-gray-400">Cart</a>
-            <span class="text-gray-600 hover:text-gray-400">&gt; Address</span>
-            <span class="text-gray-600 hover:text-gray-400">&gt; Payment</span>
+            <span class="text-gray-600 ">&gt; Address</span>
+            <span class="text-gray-600 ">&gt; Payment</span>
         </div>
         <div class="flex items-center mb-3">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

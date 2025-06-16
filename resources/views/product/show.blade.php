@@ -1,8 +1,10 @@
 <x-layout>
-
+    @if(session('loginStatus'))
+    <x-partials.successAlert>Login successful. Click Buy now button to proceed.</x-partials.successAlert>
+    @endif
     <section class="relative pt-30 px-10">
         <!-- Product Review Page -->
-         @foreach ($products as $product)
+        @foreach ($products as $product)
         <div class="product-page grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
             <!-- Left Image Section -->
             <div class="sticky top-20 flex gap-4 h-fit">
@@ -27,7 +29,7 @@
                     <input name="product_price" type="hidden" value="{{$product->product_price}}">
                     <input name="product_image" type="hidden" value="{{$product->product_image[rand(0,4)]}}">
                     <h1 class=" product text-2xl font-semibold">{{$product->product_name}}</h1>
-                    <span class="text-xl font-medium text-gray-600" >₹ <span id= "totalOrderValue" data-price="{{$totalOrderValue}}">{{$product->product_price}}</span></span>
+                    <span class="text-xl font-medium text-gray-600">₹ <span id="totalOrderValue" data-price="{{$totalOrderValue}}">{{$product->product_price}}</span></span>
 
                     <!-- Size Selector -->
                     <div class="flex gap-2">
@@ -61,7 +63,7 @@
                         <div class="flex items-center gap-2">
                             <button id="btn-minus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 cursor-pointer ">-</button>
                             <input id="input-qty" type="hidden" name="product_quantity" value="1">
-                            <span id="qty-value" data-qty = "{{$product->product_quantity}}">{{$product->product_quantity ?? 1}}</span>
+                            <span id="qty-value" data-qty="{{$product->product_quantity}}">{{$product->product_quantity ?? 1}}</span>
                             <button id="btn-plus" type="button" class="w-8 h-8 border rounded hover:bg-gray-200 cursor-pointer ">+</button>
                         </div>
                     </div>

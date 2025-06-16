@@ -68,10 +68,10 @@
             </aside>
 
             <!-- Product Grid -->
-            <section class="flex-1 grid grid-cols-4 gap-10">
+            <section class="  flex-1 grid grid-cols-4 gap-10">
                 <!-- Block for each product -->
                 @foreach ($products as $product)
-                <a href="/product/{{$product->product_name}}" class="overflow-hidden rounded-md shadow hover:shadow-lg transition">
+                <a href="/product/{{$product->product_name}}" class="section overflow-hidden rounded-md shadow hover:shadow-lg transition">
                     <img id="landing-page"
                         src="{{$product->product_image[0]}}"
                         data-original="{{$product->product_image[0]}}"
@@ -88,11 +88,12 @@
         </div>
 
 
-        <div class="px-8 py-8">
-            {{ $products->links() }}
-        </div>
+       
     </section>
 
+    @push('scripts')
+    @vite(['resources/js/lazyLoader.js'])
+    @endpush
 
 
    

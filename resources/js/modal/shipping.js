@@ -28,20 +28,20 @@ class ShippingHandler {
     }
 
     //redundant
-    setObserver() {
+    // setObserver() {
 
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+    //     this.observer = new IntersectionObserver((entries) => {
+    //         entries.forEach((entry) => {
 
-                if (entry.isIntersecting) {
-                    this.preloadData(entry.target.getAttribute('data-id'))
-                    this.observer.unobserve(entry.target)
-                }
-            })
-        }, { threshold: 0.50 })
+    //             if (entry.isIntersecting) {
+    //                 this.preloadData(entry.target.getAttribute('data-id'))
+    //                 this.observer.unobserve(entry.target)
+    //             }
+    //         })
+    //     }, { threshold: 0.50 })
 
-        this.editBtn.forEach(btn => this.observer.observe(btn))
-    }
+    //     this.editBtn.forEach(btn => this.observer.observe(btn))
+    // }
 
     show() {
         this.resetForm()
@@ -65,7 +65,6 @@ class ShippingHandler {
     hide() {
         this.main.classList.replace('flex', 'hidden');
         this.body.classList.remove('overflow-hidden')
-
     }
 
 
@@ -122,8 +121,6 @@ class ShippingHandler {
         this.body.classList.add('overflow-hidden')
         this.updateBtn.classList.remove('hidden')
         this.submitBtn.classList.add('hidden')
-
-
     }
 
 

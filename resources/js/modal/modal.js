@@ -31,7 +31,7 @@ class orderDetailsModal {
         this.buyBtn.addEventListener('click', () => this.showModal())
         this.closeBtn.addEventListener('click', () => this.hideModal())
         this.orderSummary.addEventListener('click', () => this.toggleSubSummary())
-        this.placeOrdeBtn.addEventListener('click', () => this.placingOrder())
+        this.placeOrdeBtn?.addEventListener('click', () => this.placingOrder())
         // this.formSubmitBtn.addEventListener('click', (e) => this.store(e))
     }
 

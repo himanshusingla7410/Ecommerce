@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const womenTab = document.querySelector('#women-tab');
     const womenFlyOutMenu = document.querySelector('#women-flyout-menu');
     const images = document.querySelectorAll('#landing-page');
-    
 
     // Appearing flyout menu
     function flyOutMenuShow($tab, $flyOutMenu) {

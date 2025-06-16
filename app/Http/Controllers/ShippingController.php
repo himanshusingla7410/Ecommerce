@@ -67,7 +67,7 @@ class ShippingController extends Controller
         $savings = request()->session()->get('savings');
         $totalAmt = request()->session()->get('totalAmt');
 
-
+        
         return view('shipping.index', compact('addresses', 'orderAmt', 'couponUsed', 'savings', 'totalAmt'));
     }
 
@@ -108,10 +108,9 @@ class ShippingController extends Controller
         return $addresses;
     }
 
-    public function check() 
+    public function check()
     {
 
-        dd('test');
-
+        dd(request());
     }
 }

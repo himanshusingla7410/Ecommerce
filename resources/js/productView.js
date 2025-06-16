@@ -30,8 +30,8 @@ class ProductViewHandler {
         this.plusBtn.addEventListener('click', () => this.increaseQty())
         this.minusBtn.addEventListener('click', () => this.decreaseQty())
         this.submissionForm.addEventListener('submit', (e) => this.addToCart(e))
-
     }
+
 
     imageSwitcher() {
 
@@ -84,7 +84,7 @@ class ProductViewHandler {
             })
 
             if (!response.ok) {
-                throw new Error( await response.text())
+                throw new Error(await response.text())
             }
 
             const data = await response.json()
@@ -106,7 +106,7 @@ class ProductViewHandler {
 
 
 
-    
+
 
 }
 

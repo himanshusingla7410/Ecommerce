@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart', [CartController::class, 'index'])->middleware('cacheResponse:300');
 Route::get('/cart/delete', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/cart', [CartController::class, 'store']);
 Route::delete('/product/cart', [CartController::class, 'destroy']);
@@ -18,13 +18,13 @@ Route::delete('/product/cart', [CartController::class, 'destroy']);
 Route::get('/', [ProductController::class, 'welcome'])->middleware('cacheResponse:300');
 Route::get('/products', [ProductController::class, 'index'])->middleware('cacheResponse:300');
 Route::get('/product/{name}', [ProductController::class, 'show']);
-Route::get('/product/checkout', [ProductController::class, 'checkout']);
+Route::get('/preload', [ProductController::class, 'preload']);
 
 Route::get('/coupon', [CouponController::class, 'index']);
 
 
 Route::post('/placeorder', [ShippingController::class, 'index']);
-Route::post('/address', [ShippingController::class, 'store']);
+Route::post('/address', [ShippingController::class, 'store'])->name('address');
 Route::patch('/address', [ShippingController::class, 'check']);
 Route::get('/address/{id}', [ShippingController::class, 'edit']);
 

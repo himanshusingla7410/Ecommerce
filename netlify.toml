@@ -12,4 +12,4 @@
 [build.environment]
   APP_ENV = "production"
   APP_DEBUG = "false"
-  VITE_APP_URL = "https://Dilkash.netlify.app"
+  VITE_APP_URL = "https://dilkashh.netlify.app"

@@ -1,0 +1,15 @@
+[build]
+  command = "composer install --optimize-autoloader --no-dev && npm install && npm run build"
+  publish = "public"
+
+# Required for Laravel routing (avoid 404s on page refresh)
+[[redirects]]
+  from = "/*"
+  to = "/index.php"
+  status = 200
+
+# Optional: Environment variables (if not using Netlify UI)
+[build.environment]
+  APP_ENV = "production"
+  APP_DEBUG = "false"
+  VITE_APP_URL = "https://Dilkash.netlify.app"

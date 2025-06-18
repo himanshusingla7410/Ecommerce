@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: laravel-vite-app
+    runtime: php
+    buildCommand: |
+      composer install --optimize-autoloader --no-dev
+      npm install
+      npm run build  # This runs Vite compilation
+      php artisan optimize:clear
+    startCommand: php artisan serve --host=0.0.0.0 --port=${PORT}
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_URL
+        value: https://Dilaksh.onrender.com
+      - key: VITE_APP_URL
+        value: https://Dilaksh.onrender.com

@@ -1,5 +1,5 @@
 <x-layout>
-
+    <x-partials.successAlert>Order details sent on mail.</x-partials.successAlert>
     <!-- Payment Success  -->
     <div class="mt-40 mb-40 ml-70 mr-70 border border-black-300 rounded-md shadow-lg ">
         <div class="flex justify-center mt-5 ">
@@ -43,8 +43,7 @@
 
 
     @push('scripts')
-    <!-- @vite(['resources/js/modal/shipping.js']) -->
-    <!-- @vite(['resources/js/paymentGateway.js']) -->
+    @vite(['resources/js/orderDetails.js'])
     @endpush
 
 

@@ -23,6 +23,7 @@ class ProductViewHandler {
         this.blackDot = document.querySelector('#cart-black-dot')
         this.individualItemPrice = document.querySelector('#totalOrderValue')
         this.qty = 1
+        
     }
 
     listenForEvents() {
@@ -104,7 +105,7 @@ class ProductViewHandler {
 
     }
 
-
+    
 
 
 

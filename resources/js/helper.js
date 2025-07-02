@@ -1,5 +1,7 @@
 export function feedback(ele) {
-    ele.classList.remove('hidden')
+    if (ele.classList.contains('hidden')) {
+        ele.classList.remove('hidden')
+    }
     setTimeout(() => ele.classList.add('hidden'), 3000)
 
 }

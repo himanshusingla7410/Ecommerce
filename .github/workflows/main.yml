@@ -1,0 +1,48 @@
+name: Deploy to AWS Lightsail
+
+on: 
+  push:
+    branches: [master]
+
+
+jobs: 
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: premission changed
+        uses: actions/ssh-action@v1
+        with:
+          script: |
+            sudo chown -R ubuntu:www-data /var/www/html/myapp
+          
+
+
+      - name: copy files via SCP
+        uses: appleboy/scp-action@v0.1.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SERVER_KEY }}
+          source: "./"
+          target: "/var/www/html/myapp"
+
+
+      - name: deploy changes
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SERVER_KEY }}
+          script: | 
+              sudo chown -R www-data:www-data /var/www/html/myapp
+              sudo chmod -R 775 /var/www/html/myapp/storage /var/www/html/myapp/bootstrap/cache
+              sudo systemctl restart apache2
+              cd /var/www/html/myapp
+              php artisan config:clear
+              php artisan route:clear
+              php artisan view:clear
+              

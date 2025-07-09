@@ -16,6 +16,9 @@ jobs:
       - name: premission changed
         uses: appleboy/ssh-action@v1
         with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SERVER_KEY }}
           script: |
             sudo chown -R ubuntu:www-data /var/www/html/myapp
           

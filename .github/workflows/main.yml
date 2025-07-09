@@ -22,6 +22,8 @@ jobs:
           script: |
             sudo chown -R ubuntu:www-data /var/www/html/myapp
           
+      - name: Debug key content length
+        run: echo "${{ secrets.SERVER_KEY }}" | wc -c
 
 
       - name: copy files via SCP

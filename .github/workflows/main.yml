@@ -27,7 +27,7 @@ jobs:
 
 
       - name: copy files via SCP
-        uses: appleboy/scp-action@v0.1.0
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ubuntu
@@ -47,7 +47,7 @@ jobs:
               sudo chmod -R 775 /var/www/html/myapp/storage /var/www/html/myapp/bootstrap/cache
               sudo systemctl restart apache2
               cd /var/www/html/myapp
-              php artisan config:clear
-              php artisan route:clear
-              php artisan view:clear
+              php artisan config:clear
+              php artisan route:clear
+              php artisan view:clear
               

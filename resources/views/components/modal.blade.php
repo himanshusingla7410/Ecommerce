@@ -42,7 +42,7 @@
             <div class="flex justify-between">
                 <div class="flex">
                     <img src="https://fastrr-boost-ui.pickrr.com/assets/images/svg/discount_icon.svg" alt="coupon-logo" class="pr-0.5">
-                    <span id="coupon-code" class="text-s">XOXO10</span>
+                    <span id="coupon-code" class="text-s">XOXO-10</span>
                 </div>
 
                 <button id="default-apply-btn" class="apply-btn text-indigo-500 font-semibold cursor-pointer" data-code="XOXO10">Apply</button>

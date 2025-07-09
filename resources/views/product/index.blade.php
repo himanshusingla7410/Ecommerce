@@ -98,7 +98,7 @@
             <!-- Product Grid -->
             <section class=" product-grid flex-1 grid grid-cols-4 gap-10">
                 <!-- Block for each product -->
-
+              
                 @include('components.products.show', ['products' => $products])
 
             </section>

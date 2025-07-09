@@ -41,6 +41,7 @@ class paymentHandler {
 
         } else {
 
+            
             this.ProceedbtnUpdate('bg-black', 'bg-gray-800', 'Processing...')
 
 
@@ -71,7 +72,7 @@ class paymentHandler {
                 const data = await response.json()
 
                 if (data.status === 'success') {
-
+                    
                     var options = {
                         "key": data.key, // Enter the Key ID generated from the Dashboard
                         "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise

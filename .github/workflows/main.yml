@@ -22,10 +22,8 @@ jobs:
           script: |
             sudo chown -R ubuntu:www-data /var/www/html/myapp
           
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.20.6'  # Exact version matching server
+      - name: check version Node.js
+        run: node -v
 
       - name: copy files via SCP
         uses: appleboy/scp-action@master

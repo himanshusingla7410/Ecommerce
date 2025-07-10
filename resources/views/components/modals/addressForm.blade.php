@@ -2,7 +2,7 @@
     <div class="relative bg-white rounded-xl shadow-2xl p-6 text-center max-w-2xl w-full">
         <h2 class="text-2xl font-bold text-gray-800 mt-10">Add Address</h2>
 
-        <button class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold">&times;</button>
+        <button id="form-close-btn" type="button" class="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold cursor-pointer">&times;</button>
 
         <form action="/address" method="POST" id="addressForm">
             @csrf

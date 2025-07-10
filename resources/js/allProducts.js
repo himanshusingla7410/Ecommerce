@@ -1,3 +1,5 @@
+import { imageSwitcher } from "./helper"
+
 class viewAndFilterHandler {
 
     constructor() {
@@ -29,7 +31,7 @@ class viewAndFilterHandler {
         this.selector(this.sizes, 'size')
         this.selector(this.colors, 'color')
         this.priceSlider()
-       
+
     }
 
 
@@ -107,6 +109,8 @@ class viewAndFilterHandler {
         } else {
             this.grid.classList.add('grid')
         }
+        
+        imageSwitcher(document.querySelectorAll('#landing-page'))
 
     }
 
@@ -122,7 +126,7 @@ class viewAndFilterHandler {
             element.addEventListener('click', (e) => {
                 e.target.previousElementSibling.classList.toggle('hidden')
                 e.target.parentElement.classList.toggle('font-semibold')
-                e.target.parentElement.classList.contains('font-semibold') ? this.filter(this.buildQuery(filterOption, e.target.textContent)) : ""
+                e.target.parentElement.classList.contains('font-semibold') ? this.filter(this.buildQuery(filterOption, e.target.textContent)) : this.filter(this.modifyQuery(filterOption, e.target.textContent))
             })
         })
 
@@ -130,7 +134,6 @@ class viewAndFilterHandler {
 
     async filter(q) {
 
-        console.log(`/api/filter?${q}`)
         try {
             const response = await fetch(`/api/filter?${q}`)
 
@@ -155,6 +158,13 @@ class viewAndFilterHandler {
         return this.qs.toString()
 
     }
+
+    modifyQuery(key, value) {
+
+        this.qs.delete(key, value)
+        return this.qs.toString()
+    }
+
 
     priceSlider() {
 

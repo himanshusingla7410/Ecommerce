@@ -22,7 +22,7 @@
             <div class="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div class="flex h-full space-x-8">
                     <div class="flex">
-                        <button id="women-tab" type="button" class="relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out border-transparent text-gray-700 hover:text-gray-800">Women</button>
+                        <button id="women-tab" type="button" class="tab relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out border-transparent text-gray-700 hover:text-gray-800">Women</button>
 
                         <!--
                                         'Women' flyout menu, show/hide based on flyout menu state.
@@ -34,7 +34,7 @@
                                         From: "opacity-100"
                                         To: "opacity-0"
                                         -->
-                        <div id="women-flyout-menu" class="absolute hidden  inset-x-0 top-full text-sm text-gray-500">
+                        <div id="women-flyout-menu" class="flyout-menu absolute hidden  inset-x-0 top-full text-sm text-gray-500">
                             <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
                             <div class="absolute inset-0 top-1/2 bg-white shadow-sm" aria-hidden="true"></div>
 
@@ -104,7 +104,7 @@
 
                     <div class="flex">
 
-                        <button id="men-tab" type="button" class="relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out border-transparent text-gray-700 hover:text-gray-800">Men</button>
+                        <button id="men-tab" type="button" class="tab relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out border-transparent text-gray-700 hover:text-gray-800">Men</button>
 
                         <!--
                                         'Men' flyout menu, show/hide based on flyout menu state.
@@ -116,7 +116,7 @@
                                         From: "opacity-100"
                                         To: "opacity-0"
                                         -->
-                        <div id="men-flyout-menu" class="hidden absolute  inset-x-0 top-full text-sm text-gray-500">
+                        <div id="men-flyout-menu" class="flyout-menu absolute  inset-x-0 top-full text-sm text-gray-500 hidden">
                             <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
                             <div class="absolute inset-0 top-1/2 bg-white shadow-sm" aria-hidden="true"></div>
 

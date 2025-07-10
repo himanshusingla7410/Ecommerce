@@ -89,10 +89,7 @@
                     </div>
                 </details>
                 <hr />
-                <div>
-                    <h2 class="flex justify-between font-semibold mb-2 cursor-pointer">Availability <span>&#9662;</span></h2>
-                    <hr />
-                </div>
+                
             </aside>
 
             <!-- Product Grid -->

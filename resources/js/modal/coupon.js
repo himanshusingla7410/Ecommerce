@@ -183,7 +183,7 @@ class couponHandler {
 
         this.couponRemoveBtn.classList.add('hidden')
         this.defaultApplyBtn.classList.remove('hidden')
-        this.couponCode.textContent = 'XOXO10'
+        this.couponCode.textContent = 'XOXO-10'
         this.couponAppliedMessage.innerHTML = 'Apply coupon and save'
         this.updatingOrderAmt('#modal-total-price')
         this.subCouponDisplay.classList.replace('flex', 'hidden')

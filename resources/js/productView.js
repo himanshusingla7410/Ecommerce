@@ -3,7 +3,7 @@ class ProductViewHandler {
     constructor() {
 
         this.cacheDOM()
-        this.imageSwitcher()
+        this.thumbnailImageSwitcher()
         this.listenForEvents()
 
     }
@@ -34,12 +34,12 @@ class ProductViewHandler {
     }
 
 
-    imageSwitcher() {
+    thumbnailImageSwitcher() {
 
         this.images.forEach((i) => i.addEventListener('click', (e) => {
             document.querySelector('#mainImage').src = i.src;
-        })
-        )
+        }))
+        
     }
 
     increaseQty() {

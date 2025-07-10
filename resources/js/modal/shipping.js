@@ -16,6 +16,7 @@ class ShippingHandler {
         this.form = document.querySelector('#addressForm')
         this.updateBtn = document.querySelector('#update-btn')
         this.submitBtn = document.querySelector('#submit-btn')
+        this.addressFormCloseBtn = document.querySelector('#form-close-btn')
     }
 
     listenForEvents() {
@@ -24,6 +25,7 @@ class ShippingHandler {
             this.show()
         })
         this.cancelBtn.addEventListener('click', () => this.hide())
+        this.addressFormCloseBtn.addEventListener('click', () => this.hide())
         this.editBtn.forEach(btn => btn.addEventListener('click', (e) => this.showFormToEdit(e)))
     }
 

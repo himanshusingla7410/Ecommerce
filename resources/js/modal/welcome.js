@@ -10,7 +10,10 @@ class LogInDiscountHandler {
 
     listenForEvents() {
         document.querySelector('#copy-btn')?.addEventListener('click', () => this.copyCode());
-        document.querySelector('#close-btn').addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
+        document.querySelector('#close-btn').addEventListener('click', () => {
+            document.querySelector('#main').classList.replace('flex', 'hidden')
+            localStorage.setItem('discountClaimed', true)
+        })
         document.querySelector('#no-thanks')?.addEventListener('click', () => document.querySelector('#main').classList.replace('flex', 'hidden'))
         document.querySelector('.shop-now')?.addEventListener('click', () => localStorage.setItem('discountClaimed', true))
 

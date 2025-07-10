@@ -18,7 +18,7 @@
             </div>
 
             <div id="coupon-discount" class=" justify-between text-green-500 text-xs mt-1 hidden">
-                <p id="sub-coupon-code">Coupon discount(XOXO10)</p>
+                <p id="sub-coupon-code">Coupon discount(XOXO-10)</p>
                 <span id="coupon-discount-amt">-{{$totalOrderValue *0.1}} </span>
             </div>
             <div class="max-h-60 overflow-y-auto ml-2 mt-2">
@@ -45,7 +45,7 @@
                     <span id="coupon-code" class="text-s">XOXO-10</span>
                 </div>
 
-                <button id="default-apply-btn" class="apply-btn text-indigo-500 font-semibold cursor-pointer" data-code="XOXO10">Apply</button>
+                <button id="default-apply-btn" class="apply-btn text-indigo-500 font-semibold cursor-pointer" data-code="XOXO-10">Apply</button>
                 <button id="remove-coupon" class=" cursor-pointer hidden ">X</button>
 
             </div>

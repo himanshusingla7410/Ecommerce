@@ -22,7 +22,11 @@ jobs:
           script: |
             sudo chown -R ubuntu:www-data /var/www/html/myapp
           
-     
+      - name: check node verison
+        run: |
+          node -v
+          npm -v
+
       - name: copy files via SCP
         uses: appleboy/scp-action@master
         with:

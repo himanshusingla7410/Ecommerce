@@ -9,7 +9,6 @@ use App\Http\Controllers\ShippingController;
 use Illuminate\Support\Facades\Route;
 
 
-
 Route::get('/cart', [CartController::class, 'index']);
 Route::get('/cart/delete', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/cart', [CartController::class, 'store']);

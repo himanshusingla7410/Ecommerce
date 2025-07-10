@@ -24,7 +24,7 @@ jobs:
           
       - name: check for frontend changes
         run: |
-          if git diff --name-only HEAD^ HEAD | grep -E 'resources/js/|resources/css/|resources/views/|vite.config.js;' then
+          if git diff --name-only HEAD^ HEAD | grep -E 'resources/js/|resources/css/|resources/views/|vite.config.js'; then
             echo "frontend_changed=true" >> $GITHUB_OUTPUT
           else
             echo "frontend_changed=false" >> $GITHUB_OUTPUT

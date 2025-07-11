@@ -39,14 +39,15 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SERVER_KEY }}
           script: | 
-              sudo chown -R www-data:www-data /var/www/html/myapp
-              sudo chmod -R 775 /var/www/html/myapp/storage /var/www/html/myapp/bootstrap/cache
+              
               cd /var/www/html/myapp
               php artisan config:clear
               php artisan route:clear
               php artisan view:clear
               npm install
               npm run build
+              sudo chown -R www-data:www-data /var/www/html/myapp
+              sudo chmod -R 775 /var/www/html/myapp/storage /var/www/html/myapp/bootstrap/cache
               sudo systemctl restart apache2
 
               

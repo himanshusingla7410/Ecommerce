@@ -7,7 +7,7 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 
                     'resources/js/app.js',
-                    'resources/js/allProdcuts.js',
+                    'resources/js/allProducts.js',
                     'resources/js/cart.js',
                     'resources/js/helper.js',
                     'resources/js/orderDetails.js',

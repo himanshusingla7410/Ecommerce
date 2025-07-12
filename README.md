@@ -37,7 +37,7 @@
 ```bash
 # Clone the repository
 git clone https://github.com/himanshusingla7410/Ecommerce.git
-cd dilkash
+cd Ecommerce
 
 # Install dependencies
 composer install

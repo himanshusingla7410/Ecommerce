@@ -58,7 +58,7 @@ class CartHandler {
 
     async estShipping() {
 
-        if (!document.querySelector('#zip-code').value) {
+        if (!parseInt(document.querySelector('#zip-code').value)) {
             this.error.classList.remove('hidden')
             if (!this.message.classList.contains('hidden')) {
                 this.message.classList.add('hidden')
@@ -67,7 +67,7 @@ class CartHandler {
 
         const url = new URLSearchParams({
             'pickup_postcode': 141001,
-            'delivery_postcode': document.querySelector('#zip-code').value,
+            'delivery_postcode': parseInt(document.querySelector('#zip-code').value),
             'weight': 2,
             'cod': 1
         }).toString()
@@ -89,7 +89,6 @@ class CartHandler {
         const data = await response.json()
 
         if (data.status === 200) {
-            console.log(data)
             if (this.message.classList.contains('hidden')) {
                 this.message.classList.remove('hidden')
             }

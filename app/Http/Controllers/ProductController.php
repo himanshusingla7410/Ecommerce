@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 
-
 class ProductController extends Controller
 {
 
@@ -37,11 +36,12 @@ class ProductController extends Controller
 
 
     public  function show($product_name, OrderService $orderservice)
-    {
+    {   
+        
         $products = Product::where('product_name', $product_name)->get();
         $totalOrderValue = $orderservice->calculateOrderValue($products);
-
-        return view('product.show', compact('products', 'totalOrderValue'));
+       
+        return $products->isEmpty() ? view('errorCodes.404') : view('product.show', compact('products', 'totalOrderValue'));
     }
 
     public function preload()

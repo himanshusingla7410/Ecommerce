@@ -1,5 +1,7 @@
 <x-layout>
-
+    <x-slot:heading>
+        New Arrivals
+    </x-slot:heading>
     <section class="relative pt-30 ">
         <!-- Main heading -->
         <div class="flex justify-center font-semibold p-15 border-b border-gray-300 text-5xl">

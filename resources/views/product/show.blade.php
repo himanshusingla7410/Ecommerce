@@ -1,4 +1,9 @@
 <x-layout>
+    <x-slot:heading>
+        @foreach ( $products as $product)
+            {{$product->product_name}}
+        @endforeach
+    </x-slot:heading>
     @if(session('loginStatus'))
     <x-partials.successAlert>Login successful. Click Buy now button to proceed.</x-partials.successAlert>
     @endif
@@ -104,7 +109,6 @@
     </section>
 
     <x-modal :products="$products" :totalOrderValue="$totalOrderValue"></x-modal>
-
 
     @push('scripts')
     @vite(['resources/js/productView.js'])

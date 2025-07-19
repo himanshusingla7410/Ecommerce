@@ -1,4 +1,7 @@
 <x-layout>
+    <x-slot:heading>
+        Cart
+    </x-slot:heading>
     @if(session('loginStatus'))
     <x-partials.successAlert>Login successful. Click Buy now button to proceed.</x-partials.successAlert>
     @endif
@@ -22,12 +25,14 @@
                         @foreach( $products as $item)
                         <tr>
                             <td class="px-6 py-4 flex items-start gap-4">
-                                <img class="rounded-md w-24 h-auto" src="{{$item->product_image}}" alt="">
-                                <div class="p-1">
-                                    <div class="product font-semibold">{{$item->product_name}}</div>
-                                    <div class="text-gray-500">₹ {{$item->product_price}}</div>
-                                    <div class="text-s text-gray-400">{{$item->product_size}}</div>
-                                </div>
+                                <a href="/product/{{$item->product_name}}" class="flex space-x-4">
+                                    <img class="rounded-md w-24 h-auto" src="{{$item->product_image}}" alt="">
+                                    <div class="p-1">
+                                        <div class="product font-semibold">{{$item->product_name}}</div>
+                                        <div class="text-gray-500">₹ {{$item->product_price}}</div>
+                                        <div class="text-s text-gray-400">{{$item->product_size}}</div>
+                                    </div>
+                                </a>
                             </td>
                             <td id="qty-control" class="text-center align-middle">
                                 <!-- Quantity controls -->
@@ -75,27 +80,15 @@
                     <p class="mb-5 text-xl font-semibold">Estimate shipping</p>
                     <div class="flex items-center justify-center space-x-6">
 
-                        <div>
-                            <label for="country">Country</label>
-                            <select class="border border-gray-300 p-2" name="country" id="country">
-                                <option value="india" default>India</option>
-                                <option value="usa" default>USA</option>
-                                <option value="australia" default>Australia</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="Province">Province</label>
-                            <select class="border border-gray-300 p-2" name="Province" id="Province">
-                                <option value="Delhi" default>Delhi</option>
-                                <option value="chandigarh" default>Chandigarh</option>
-                                <option value="mumbai" default>Mumbai</option>
-                            </select>
-                        </div>
-
-                        <input class="border border-gray-300 p-2" type="zip-code" value="" placeholder="Enter zip code">
-                        <a href="/address" id="" type="button" class=" w-24 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
+                        <input id="zip-code" class="border border-gray-300 p-2" type="zip-code" value="" placeholder="Enter zip code" required>
+                        <button id="est-shipping" type="button" class=" w-24 bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-900 transition">
                             Estimate
-                        </a>
+                        </button>
+                    </div>
+                    <div id="charges-cont" class="mt-8  ">
+                        <p id="error" class="hidden">Please enter a valid pin code.</p>
+                        <p id="message" class="hidden">Standard estimated charges: ₹ <span id="charges"> 10</span></p>
+
                     </div>
                 </div>
 

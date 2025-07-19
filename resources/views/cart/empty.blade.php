@@ -1,4 +1,7 @@
 <x-layout>
+    <x-slot:heading>
+        Cart
+    </x-slot:heading>
 
     <section class="relative pt-30 px-10">
         <div class="py-10 px-35">

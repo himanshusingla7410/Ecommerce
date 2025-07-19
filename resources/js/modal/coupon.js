@@ -102,7 +102,7 @@ class couponHandler {
                         </div>
                         <div class="mt-3">
                             ${coupon.missingAmount === 0 ?
-                    `<p id="savings" class=" text-green-800 font-semibold text-start text-sm" data-savings = ${coupon.savings}>Apply this coupon and save ₹ ${coupon.savings}"</p>` :
+                    `<p id="savings" class=" text-green-800 font-semibold text-start text-sm" data-savings = ${coupon.savings}>Apply this coupon and save ₹ ${coupon.savings}</p>` :
                     `<p class="text-red-800 font-semibold text-start text-sm">Add more items worth ₹ ${coupon.missingAmount} to apply this offer</p>`
                 }  
                             <p class="text-xs text-start">${coupon.description}</p>

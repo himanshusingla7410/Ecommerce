@@ -1,5 +1,7 @@
 <x-layout>
-
+    <x-slot:heading>
+        Dilkash
+    </x-slot:heading>
     <section>
         <div class="relative pt-8">
             <img src="	https://babli.in/cdn/shop/files/11_9918ed89-b59a-426b-9afc-ccc67305cb62.jpg?v=1742564273&width=2000" alt="Model siting." class="w-full h-150 aspect-square rounded-lg shadow-md">

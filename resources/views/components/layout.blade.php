@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"class="h-full">
+<html lang="en" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,18 @@
 
     @vite(['resources/js/app.js'])
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6MVYCDQ480"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-6MVYCDQ480');
+</script>
 
 <body class="flex flex-col min-h-screen">
     <x-header></x-header>
